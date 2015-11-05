@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/template1.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h:form id="formularioLogin">
+            <p:growl id="messagesGrows" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true" life="15000"/>
+            <p:messages id="messagesGlobals" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true"/>
+            
+            <p:focus for="txtUsuario"/>
+            <table align="center">
+                <tr>
+                    <td colspan="2" style="font-weight: bold; size: 20px;">#{props['login.titulo']}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; size: 12px; color: blue;" align="right">#{props['login.lbl.usuario']}: </td>
+                    <td><p:inputText id="txtUsuario" value="#{loginBean.user}" required="true" style="background-color: #FBDCDC !important;"
+                                     requiredMessage="#{props['login.required.usuario']}"/></td>
+                    <td><p:message for="txtUsuario"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; size: 12px; color: blue;" align="right">#{props['login.lbl.password']}: </td>
+                    <td><p:password id="txtPassword" value="#{loginBean.password}" required="true" style="background-color: #FBDCDC !important;"
+                                    requiredMessage="#{props['login.required.password']}"/></td>
+                    <td><p:message for="txtPassword"/></td>
+                </tr>
+                <tr>
+                    <td><p:commandButton type="button" value="#{props['login.btn.cancelar']}" style="font-size: 14px; color: blue;"/></td>
+                    <td><p:commandButton value="#{props['login.btn.aceptar']}" update="formularioLogin"
+                                         action="#{loginBean.validarLogin}"  style="font-size: 14px; color: blue;"/></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center; color: red; font-weight: bold;">
+                        <p:outputLabel value="#{loginBean.mensaje}"/>
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
