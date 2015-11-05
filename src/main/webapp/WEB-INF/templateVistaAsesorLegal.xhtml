@@ -25,7 +25,7 @@
                 <h:form>
                     <p:growl autoUpdate="true"/>
 
-                    <p:panelMenu style="width:250px">
+                    <p:menu style="width: 240px">
                         <p:submenu label="Gestión de Clientes">
                             <p:menuitem value="Cliente Natural" actionListener="#{menuView.save}"/>
                             <p:menuitem value="Cliente Juridico" actionListener="#{menuView.update}" />
@@ -34,7 +34,7 @@
                             <p:menuitem value="Deudor Natural" actionListener="#{menuView.delete}"/>
                             <p:menuitem value="Deudor Juridico" actionListener="#{menuView.delete}"/>
                         </p:submenu>
-                    </p:panelMenu>
+                    </p:menu>
                 </h:form>
             </p:layoutUnit>
 

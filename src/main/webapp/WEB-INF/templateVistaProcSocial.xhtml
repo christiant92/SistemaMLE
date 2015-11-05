@@ -23,21 +23,21 @@
             <!--Left-->
             <p:layoutUnit position="west" size="260" collapsible="false">                    
                 <h:form>
-                    <p:growl autoUpdate="true"/>
-
-                    <p:panelMenu style="width:250px">
+                    <p:growl id="messages" showDetail="false"/>
+                    
+                    <p:menu style="width: 240px">
                         <p:submenu label="Gestión de Procesos Judiciales">
-                            <p:menuitem value="Consultar Proceso Judicial" actionListener="#{menuView.save}"/>
+                            <p:menuitem value="Consultar Proceso Judicial" actionListener="#{menuView.save}" update="messages"/>
                         </p:submenu>
                         <p:submenu label="Gestión de Actividades Judiciales">
-                            <p:menuitem value="Registrar Actividad Judicial" actionListener="#{menuView.save}"/>
-                            <p:menuitem value="Programación de Actividades" actionListener="#{menuView.update}" />
+                            <p:menuitem value="Registrar Actividad Judicial" actionListener="#{menuView.save}" update="messages"/>
+                            <p:menuitem value="Programación de Actividades" actionListener="#{menuView.update}" update="messages"/>
                         </p:submenu>
                         <p:submenu label="Gestión de Medidas Cautelares">
-                            <p:menuitem value="Mantener Bienes" actionListener="#{menuView.save}"/>
-                            <p:menuitem value="Consultar Bienes" actionListener="#{menuView.update}" />
+                            <p:menuitem value="Mantener Bienes" actionListener="#{menuView.save}" update="messages"/>
+                            <p:menuitem value="Consultar Bienes" actionListener="#{menuView.update}" update="messages"/>
                         </p:submenu>
-                    </p:panelMenu>
+                    </p:menu>
                 </h:form>
             </p:layoutUnit>
 
