@@ -11,9 +11,9 @@
         <h2 align="center">Registro de Medida Cautelar</h2>
         <h:form>
             <p:fieldset legend="Datos Principales" style="margin-bottom:20px">
-                <h:panelGrid columns="2" cellpadding="5" >
-                    <h:outputLabel for="cc" value="Codigo cautelar:"/>
-                    <p:inputText  id="cc" value="" required="true" label="ccautelar" size="11" maxlength="11" />
+                <h:panelGrid columns="2" cellpadding="5" >                    
+                    <p:outputLabel for="cc" value="Codigo cautelar:" />
+                    <p:inputMask id="cc" value="#{maskView.taxId}" mask="999999-9999" size="11" maxlength="11" required="true"/>
                     
                     <p:outputLabel for="cal1" value="Fecha de presentación de la MC:" />
                     <p:calendar id="cal1" value="#{calendarView.date3}" showOn="button" />
