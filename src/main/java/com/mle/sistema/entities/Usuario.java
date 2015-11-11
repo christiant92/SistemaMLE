@@ -6,34 +6,33 @@
 package com.mle.sistema.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author christian
  */
 @Entity
-@Table(name = "usuario", catalog = "sistemamle_controldeusuarios", schema = "")
+@Table(name = "usuario", catalog = "sistemamle", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findByUserNameAndPassword", query = "SELECT u FROM Usuario u WHERE u.userName = :userName and u.password = :password"),
+    @NamedQuery(name = "Usuario.findByUsuarioAndPassword", query = "SELECT u FROM Usuario u WHERE u.username = :username and u.password = :password"),
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Usuario.findByUserName", query = "SELECT u FROM Usuario u WHERE u.userName = :userName"),
+    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username"),
     @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
     @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")})
 public class Usuario implements Serializable {
@@ -41,54 +40,55 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idUsuario")
-    private Integer idUsuario;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "UserName")
-    private String userName;
+    @Column(name = "username")
+    private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "Password")
+    @Column(name = "password")
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "Nombre")
+    @Size(min = 1, max = 100)
+    @Column(name = "nombre")
     private String nombre;
-    @ManyToMany(mappedBy = "usuarioList")
-    private List<Rol> rolList;
+    @JoinColumn(name = "idRol", referencedColumnName = "idRol")
+    @ManyToOne(optional = false)
+    private Rol idRol;
 
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public Usuario(Integer id) {
+        this.id = id;
     }
 
-    public Usuario(Integer idUsuario, String userName, String password, String nombre) {
-        this.idUsuario = idUsuario;
-        this.userName = userName;
+    public Usuario(Integer id, String username, String password, String nombre) {
+        this.id = id;
+        this.username = username;
         this.password = password;
         this.nombre = nombre;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -107,19 +107,18 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    public List<Rol> getRolList() {
-        return rolList;
+    public Rol getIdRol() {
+        return idRol;
     }
 
-    public void setRolList(List<Rol> rolList) {
-        this.rolList = rolList;
+    public void setIdRol(Rol idRol) {
+        this.idRol = idRol;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -130,7 +129,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -138,7 +137,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mle.sistema.entities.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "com.mle.sistema.entities.Usuario[ id=" + id + " ]";
     }
     
 }

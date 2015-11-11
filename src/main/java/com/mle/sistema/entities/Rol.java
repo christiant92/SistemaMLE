@@ -8,15 +8,15 @@ package com.mle.sistema.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,61 +28,45 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author christian
  */
 @Entity
-@Table(name = "rol", catalog = "sistemamle_controldeusuarios", schema = "")
+@Table(name = "rol", catalog = "sistemamle", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r"),
-    @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.rolPK.idRol = :idRol"),
-    @NamedQuery(name = "Rol.findBySistemaidSistema", query = "SELECT r FROM Rol r WHERE r.rolPK.sistemaidSistema = :sistemaidSistema"),
+    @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol"),
     @NamedQuery(name = "Rol.findByNombreRol", query = "SELECT r FROM Rol r WHERE r.nombreRol = :nombreRol")})
 public class Rol implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected RolPK rolPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idRol")
+    private Integer idRol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "NombreRol")
+    @Column(name = "nombreRol")
     private String nombreRol;
-    @JoinTable(name = "usuario_rol", joinColumns = {
-        @JoinColumn(name = "Rol_idRol", referencedColumnName = "idRol"),
-        @JoinColumn(name = "Rol_Sistema_idSistema", referencedColumnName = "Sistema_idSistema")}, inverseJoinColumns = {
-        @JoinColumn(name = "Usuario_idUsuario", referencedColumnName = "idUsuario")})
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRol")
     private List<Usuario> usuarioList;
-    @JoinTable(name = "rol_subopcion", joinColumns = {
-        @JoinColumn(name = "Rol_idRol", referencedColumnName = "idRol"),
-        @JoinColumn(name = "Rol_Sistema_idSistema", referencedColumnName = "Sistema_idSistema")}, inverseJoinColumns = {
-        @JoinColumn(name = "SubOpcion_idSubOpcion", referencedColumnName = "idSubOpcion"),
-        @JoinColumn(name = "SubOpcion_Opcion_idOpcion", referencedColumnName = "Opcion_idOpcion")})
-    @ManyToMany
-    private List<Subopcion> subopcionList;
-    @JoinColumn(name = "Sistema_idSistema", referencedColumnName = "idSistema", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Sistema sistema;
 
     public Rol() {
     }
 
-    public Rol(RolPK rolPK) {
-        this.rolPK = rolPK;
+    public Rol(Integer idRol) {
+        this.idRol = idRol;
     }
 
-    public Rol(RolPK rolPK, String nombreRol) {
-        this.rolPK = rolPK;
+    public Rol(Integer idRol, String nombreRol) {
+        this.idRol = idRol;
         this.nombreRol = nombreRol;
     }
 
-    public Rol(int idRol, int sistemaidSistema) {
-        this.rolPK = new RolPK(idRol, sistemaidSistema);
+    public Integer getIdRol() {
+        return idRol;
     }
 
-    public RolPK getRolPK() {
-        return rolPK;
-    }
-
-    public void setRolPK(RolPK rolPK) {
-        this.rolPK = rolPK;
+    public void setIdRol(Integer idRol) {
+        this.idRol = idRol;
     }
 
     public String getNombreRol() {
@@ -102,27 +86,10 @@ public class Rol implements Serializable {
         this.usuarioList = usuarioList;
     }
 
-    @XmlTransient
-    public List<Subopcion> getSubopcionList() {
-        return subopcionList;
-    }
-
-    public void setSubopcionList(List<Subopcion> subopcionList) {
-        this.subopcionList = subopcionList;
-    }
-
-    public Sistema getSistema() {
-        return sistema;
-    }
-
-    public void setSistema(Sistema sistema) {
-        this.sistema = sistema;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (rolPK != null ? rolPK.hashCode() : 0);
+        hash += (idRol != null ? idRol.hashCode() : 0);
         return hash;
     }
 
@@ -133,7 +100,7 @@ public class Rol implements Serializable {
             return false;
         }
         Rol other = (Rol) object;
-        if ((this.rolPK == null && other.rolPK != null) || (this.rolPK != null && !this.rolPK.equals(other.rolPK))) {
+        if ((this.idRol == null && other.idRol != null) || (this.idRol != null && !this.idRol.equals(other.idRol))) {
             return false;
         }
         return true;
@@ -141,7 +108,7 @@ public class Rol implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mle.sistema.entities.Rol[ rolPK=" + rolPK + " ]";
+        return "com.mle.sistema.entities.Rol[ idRol=" + idRol + " ]";
     }
     
 }

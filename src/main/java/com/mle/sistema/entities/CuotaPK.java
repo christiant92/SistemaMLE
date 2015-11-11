@@ -16,58 +16,58 @@ import javax.validation.constraints.NotNull;
  * @author christian
  */
 @Embeddable
-public class RolPK implements Serializable {
+public class CuotaPK implements Serializable {
     @Basic(optional = false)
-    @Column(name = "idRol")
-    private int idRol;
+    @Column(name = "NumCuota")
+    private int numCuota;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Sistema_idSistema")
-    private int sistemaidSistema;
+    @Column(name = "idServ_Prestamo")
+    private int idServPrestamo;
 
-    public RolPK() {
+    public CuotaPK() {
     }
 
-    public RolPK(int idRol, int sistemaidSistema) {
-        this.idRol = idRol;
-        this.sistemaidSistema = sistemaidSistema;
+    public CuotaPK(int numCuota, int idServPrestamo) {
+        this.numCuota = numCuota;
+        this.idServPrestamo = idServPrestamo;
     }
 
-    public int getIdRol() {
-        return idRol;
+    public int getNumCuota() {
+        return numCuota;
     }
 
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
+    public void setNumCuota(int numCuota) {
+        this.numCuota = numCuota;
     }
 
-    public int getSistemaidSistema() {
-        return sistemaidSistema;
+    public int getIdServPrestamo() {
+        return idServPrestamo;
     }
 
-    public void setSistemaidSistema(int sistemaidSistema) {
-        this.sistemaidSistema = sistemaidSistema;
+    public void setIdServPrestamo(int idServPrestamo) {
+        this.idServPrestamo = idServPrestamo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) idRol;
-        hash += (int) sistemaidSistema;
+        hash += (int) numCuota;
+        hash += (int) idServPrestamo;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RolPK)) {
+        if (!(object instanceof CuotaPK)) {
             return false;
         }
-        RolPK other = (RolPK) object;
-        if (this.idRol != other.idRol) {
+        CuotaPK other = (CuotaPK) object;
+        if (this.numCuota != other.numCuota) {
             return false;
         }
-        if (this.sistemaidSistema != other.sistemaidSistema) {
+        if (this.idServPrestamo != other.idServPrestamo) {
             return false;
         }
         return true;
@@ -75,7 +75,7 @@ public class RolPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mle.sistema.entities.RolPK[ idRol=" + idRol + ", sistemaidSistema=" + sistemaidSistema + " ]";
+        return "com.mle.sistema.entities.CuotaPK[ numCuota=" + numCuota + ", idServPrestamo=" + idServPrestamo + " ]";
     }
     
 }
