@@ -26,9 +26,9 @@ public class DAOLogin implements NegocioLogin {
     public void validarUsuario(BeanLogin bean) throws MLEException {
         //boolean estado=false;
         try {
-            Query query = em.createNamedQuery("Usuario.findByUserNameAndPassword");//Aqui va el nombre del nuevo query que generaste.
+            Query query = em.createNamedQuery("Usuario.findByUsernameAndPassword");//Aqui va el nombre del nuevo query que generaste.
                   
-            query.setParameter("userName", bean.getUser());//Aqui va el nombre del primer parametro que pusiste en tu query le anteceden : y su valor
+            query.setParameter("username", bean.getUser());//Aqui va el nombre del primer parametro que pusiste en tu query le anteceden : y su valor
             query.setParameter("password", bean.getPassword());//Aqui va el nombre del segundo parametro que pusiste en tu query le anteceden : y su valor
             List lista = query.getResultList();//Ejecutamos el query y lo guardamos en una lista.
             
