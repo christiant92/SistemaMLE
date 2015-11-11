@@ -28,7 +28,7 @@
     <context:component-scan base-package="com.mle"/>
    
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:/jboss/datasources/jdbc/MLE_CU_Conexion"/>
+        <property name="jndiName" value="java:/jboss/datasources/jdbc/MLEConexion"/>
         <!--property name="jndiName2" value="java:/jboss/datasources/jdbc/MLE_Conexion"/> <BASE DE DATOS DEL NEGOCIO-->
     </bean>
     
