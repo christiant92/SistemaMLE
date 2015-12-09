@@ -1,10 +1,104 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../WEB-INF/templateVistaAbogado.xhtml">
+                template="./../WEB-INF/templateVistaAbogado.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        RegistroProcesoJudicial
+        <h2 align="center">Registro de Proceso Judicial</h2>
+        <h:form>
+            <p:fieldset legend="Datos Principales" style="margin-bottom:20px">
+ 
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="nroExp" value="Nro. Expediente:" />
+                    <p:inputMask id="nroExp" mask="999999-9999" size="11" maxlength="11" required="true"/>
+                </h:panelGrid>
+                
+                <h:panelGrid columns="5" cellpadding="5">
+                    <h:outputLabel for="nroPagare" value="Nro. Pagare:"  />
+                    <p:outputLabel for="car" value="Grouping: " />
+                    <p:selectOneMenu id="car" >
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="" />
+                    </p:selectOneMenu>
+                    <p:selectOneMenu id="pagares" >
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItems value="#{ProcesoJudicialBean.listaPagares}" />
+                    </p:selectOneMenu>
+                    <p:commandButton value="Buscar" icon="ui-icon-search" />
+                    <p:outputLabel id="lugJuzgado" value="#{ProcesoJudicialBean.mensaje}" />
+                    <p:autoComplete value="#{maskView.text}" completeMethod="#{maskView.complete}" dropdown="true" />
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="4" cellpadding="5">
+
+                    <h:outputLabel for="Demandante" value="Nro. Expediente:"  />
+                    <p:inputText value="#{maskView.deman}" disabled="true" />
+                    <h:outputLabel for="Juzgado" value="Juzgado:" />
+                    <p:autoComplete value="#{maskView.text}" completeMethod="#{maskView.complete}" dropdown="true" />
+
+                    <h:outputLabel for="Demandado" value="Demandado:"  />
+                    <p:inputText value="#{maskView.deman}" disabled="true" />
+                    <h:outputLabel for="Especialista" value="Espacialista:"  />
+                    <p:inputText value="#{maskView.deman}" />
+
+                    <h:outputLabel for="Demandado-Aval" value="Demandado-Aval:" />
+                    <p:inputText value="#{maskView.deman}" disabled="true" />
+
+                </h:panelGrid>
+
+            </p:fieldset>
+            <p:fieldset legend="Detalles del proceso judicial" style="margin-bottom:20px">
+
+  
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="tipoProceso" value="Tipo de Proceso:"  />
+                    <p:autoComplete value="#{maskView.text}" completeMethod="#{maskView.complete}" dropdown="true" />
+                </h:panelGrid>  
+
+                <h:panelGrid columns="5" cellpadding="5">
+
+                    <h:outputLabel for="medidaCautelar" value="Codigo medida cautelar:"  />
+                    <p:inputMask id="medidaCautelar" value="#{maskView.codMedidaCautelar}" mask="99-999999-99" size="11" maxlength="11" required="true"/>
+                    <p:commandButton value="Buscar" icon="ui-icon-search" />
+                    <h:outputLabel for="avanceRegistro" value="Avance De Registros:" />
+                    <p:inputText value="#{maskView.deman}" disabled="true" />
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="cal1" value="Fecha de presentacion de la demanda:" />
+                    <p:calendar id="cal1" value="#{calendarView.date3}" showOn="button" />
+
+                    <p:outputLabel for="cal2" value="Fecha de admision de la demanda:" />
+                    <p:calendar id="cal2" value="#{calendarView.date3}" showOn="button" />
+
+                    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                            <h:outputText value="#{calendarView.date3}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:panelGrid>
+                    </p:dialog>
+                    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                        <p:panelGrid id="display2" columns="2" columnClasses="label,value">
+                            <h:outputText value="#{calendarView.date3}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:panelGrid>
+                    </p:dialog>
+
+                </h:panelGrid>
+            </p:fieldset>
+            
+             <h:panelGrid columns="2" cellpadding="5">
+                    <p:commandButton value="Registrar" icon="ui-icon-check" />
+                    <p:commandButton value="Limpiar" icon="ui-icon-clean" />
+                </h:panelGrid>      
+        </h:form>
     </ui:define>
 
 </ui:composition>

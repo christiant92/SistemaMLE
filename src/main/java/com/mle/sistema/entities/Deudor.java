@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Christian
+ * @author christian
  */
 @Entity
 @Table(name = "deudor", catalog = "sistemamle", schema = "")
@@ -65,13 +65,13 @@ public class Deudor implements Serializable {
     @Size(max = 45)
     @Column(name = "Provincia")
     private String provincia;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "deudoridDeudor")
+    @OneToMany(mappedBy = "deudoridAval")
     private List<Pagare> pagareList;
-    @OneToMany(mappedBy = "deudoridAval")
-    private List<Pagare> pagareList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deudoridDeudor")
-    private List<ServPrestamo> servPrestamoList;
+    private List<Pagare> pagareList1;
     @OneToMany(mappedBy = "deudoridAval")
+    private List<ServPrestamo> servPrestamoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "deudoridDeudor")
     private List<ServPrestamo> servPrestamoList1;
 
     public Deudor() {
@@ -201,7 +201,7 @@ public class Deudor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mle.sistema.entities.Deudor[ dni=" + dni + " ]";
+        return dni + "";
     }
     
 }

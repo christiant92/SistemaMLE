@@ -1,10 +1,118 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../WEB-INF/templateVistaAbogado.xhtml">
-
+                template="./../WEB-INF/templateVistaAbogado.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+                
     <ui:define name="content">
-        reg PAgare
+       <h2 align="center">Registro de Pagare</h2>
+       <h:form>
+           
+             <p:fieldset legend="Datos del Deudor" style="margin-bottom:20px">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="deudor" value="Deudor:" />
+                    <p:selectOneMenu id="deudor" value="#{ProcesoJudicialBean.codigoDeudor}">
+                        <p:ajax listener="#{ProcesoJudicialBean.escogerDeudor}" update="datosDeu" />
+                        <f:selectItem itemLabel="Seleccione un deudor" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{ProcesoJudicialBean.mapDeudores}" />
+                    </p:selectOneMenu>  
+                    
+                </h:panelGrid>         
+                    <h:panelGrid  id="datosDeu" columns="6" cellpadding="5">
+                        <p:outputLabel value="Nombre:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.deudor.nombres}" />
+                        <p:outputLabel value="DNI:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.deudor.dni}" />
+                        <p:outputLabel value="Direccion:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.deudor.apellidos}" />
+                    </h:panelGrid>
+             </p:fieldset>  
+           
+            <p:fieldset legend="Datos de Cliente Juridico" style="margin-bottom:20px">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="clienteJuridico" value="Cliente Juridico:" />
+                    <p:selectOneMenu id="clienteJuridico" value="#{ProcesoJudicialBean.codigoClienteJuridico}">
+                        <p:ajax listener="#{ProcesoJudicialBean.escogerClienteJuridico}" update="datosCJ" />
+                        <f:selectItem itemLabel="Seleccione un cliente juridico" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{ProcesoJudicialBean.mapClientes}" />
+                    </p:selectOneMenu>  
+                </h:panelGrid>               
+                    <h:panelGrid id="datosCJ" columns="6" cellpadding="5">
+                        <p:outputLabel value="Razon Social:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.clienteJuridico.razonSocial}" />
+                        <p:outputLabel value="Ruc:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.clienteJuridico.ruc}" />
+                        <p:outputLabel value="Direccion:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.clienteJuridico.cliente.direccion}" />
+                    </h:panelGrid>
+             </p:fieldset>   
+                  
+         
+           
+            <p:fieldset legend="Datos del Aval(Opciional)" style="margin-bottom:20px">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="deudorAval" value="Deudor (Aval) :" />
+                    <p:selectOneMenu id="deudorAval" value="#{ProcesoJudicialBean.codigoDeudorAval}">
+                        <p:ajax listener="#{ProcesoJudicialBean.escogerDeudorAval}" update="datosDeuAval" />
+                        <f:selectItem itemLabel="Seleccione un aval(Opcional)" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{ProcesoJudicialBean.mapDeudores}" />
+                    </p:selectOneMenu>  
+                </h:panelGrid>               
+                    <h:panelGrid id="datosDeuAval" columns="6" cellpadding="5">
+                        <p:outputLabel value="Nombre:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.deudorAval.nombres}" />
+                        <p:outputLabel value="DNI:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.deudorAval.dni}" />
+                        <p:outputLabel value="Direccion:" />
+                        <h:outputLabel value="#{ProcesoJudicialBean.deudorAval.apellidos}" />
+                    </h:panelGrid>
+             </p:fieldset>  
+           
+             <p:fieldset legend="Detalles del pagare" style="margin-bottom:20px">
+                <h:panelGrid columns="6" cellpadding="5">
+                    <h:outputLabel for="npag" value="N° Pagare:" />
+                    <p:inputText value="#{ProcesoJudicialBean.numPagare}" />
+                    <h:outputLabel for="sCap" value="Saldo Capital:" />
+                    <p:inputText value="#{ProcesoJudicialBean.saldoCapital}" />
+                    <h:outputLabel for="dMor" value="Dias Mora:" />
+                    <p:inputText value="#{ProcesoJudicialBean.diasMora}"/>
+
+                    <h:outputLabel for="codC" value="Codigo Credito:" />
+                    <p:inputText value="#{ProcesoJudicialBean.codCredito}" />
+                    <h:outputLabel for="sCuo" value="Saldo Cuota:" />
+                    <p:inputText value="#{ProcesoJudicialBean.saldoCuota}" />
+                    <h:outputLabel for="codD" value="Codigo Deudor:" />
+                    <p:inputText value="#{ProcesoJudicialBean.codDeudor}"/>
+                    
+                    <p:outputLabel for="cal1" value="Fecha de realizacion del prestamo:" />
+                    <p:calendar id="cal1" value="#{ProcesoJudicialBean.fechaPrestamo}" showOn="button" />
+
+                    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                            <h:outputText value="#{ProcesoJudicialBean.fechaPrestamo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:panelGrid>
+                    </p:dialog>
+                    <p:outputLabel for="sitC" value="Situacion Contractual:" />
+                    <p:selectOneMenu id="sitC" value="#{ProcesoJudicialBean.situacionContractual}" style="width:125px">
+                        <f:selectItem itemLabel="Select" itemValue="" />
+                        <f:selectItem itemLabel="Castigado" itemValue="Castigado" />
+                        <f:selectItem itemLabel="Vencido" itemValue="Vencido" />
+                        <f:selectItem itemLabel="Judicial" itemValue="Judicial" />
+                    </p:selectOneMenu>   
+                </h:panelGrid>               
+             </p:fieldset>  
+           
+           <h:panelGrid columns="2" cellpadding="5">
+               <p:commandButton value="Registrar" icon="ui-icon-check" id="registrarPagare" actionListener="#{ProcesoJudicialBean.registrarPagare}" styleClass="ui-priority-primary" />
+               <p:commandButton value="Limpiar" icon="ui-icon-clean" />
+           </h:panelGrid>  
+        </h:form>
+       
     </ui:define>
 
 </ui:composition>
