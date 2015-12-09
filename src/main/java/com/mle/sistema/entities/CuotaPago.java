@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "cuota_pago", catalog = "sistemamle", schema = "")
@@ -40,14 +40,14 @@ public class CuotaPago implements Serializable {
     @NotNull
     @Column(name = "Monto")
     private float monto;
-    @JoinColumn(name = "Pago_idPago", referencedColumnName = "idPago", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Pago pago;
     @JoinColumns({
         @JoinColumn(name = "Cuota_NumCuota", referencedColumnName = "NumCuota", insertable = false, updatable = false),
         @JoinColumn(name = "idServ_Prestamo", referencedColumnName = "idServ_Prestamo", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Cuota cuota;
+    @JoinColumn(name = "Pago_idPago", referencedColumnName = "idPago", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Pago pago;
 
     public CuotaPago() {
     }
@@ -81,20 +81,20 @@ public class CuotaPago implements Serializable {
         this.monto = monto;
     }
 
-    public Pago getPago() {
-        return pago;
-    }
-
-    public void setPago(Pago pago) {
-        this.pago = pago;
-    }
-
     public Cuota getCuota() {
         return cuota;
     }
 
     public void setCuota(Cuota cuota) {
         this.cuota = cuota;
+    }
+
+    public Pago getPago() {
+        return pago;
+    }
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
     }
 
     @Override

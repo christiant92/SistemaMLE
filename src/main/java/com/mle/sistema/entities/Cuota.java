@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "cuota", catalog = "sistemamle", schema = "")
@@ -56,12 +56,12 @@ public class Cuota implements Serializable {
     @Column(name = "Fecha_cuota")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacuota;
-    @JoinColumn(name = "idServ_Prestamo", referencedColumnName = "idServ_Prestamo", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private ServPrestamo servPrestamo;
     @JoinColumn(name = "idDocumento_TituloValor", referencedColumnName = "idDocumento")
     @ManyToOne
     private Documento idDocumentoTituloValor;
+    @JoinColumn(name = "idServ_Prestamo", referencedColumnName = "idServ_Prestamo", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private ServPrestamo servPrestamo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuota")
     private List<CuotaPago> cuotaPagoList;
 
@@ -115,20 +115,20 @@ public class Cuota implements Serializable {
         this.fechacuota = fechacuota;
     }
 
-    public ServPrestamo getServPrestamo() {
-        return servPrestamo;
-    }
-
-    public void setServPrestamo(ServPrestamo servPrestamo) {
-        this.servPrestamo = servPrestamo;
-    }
-
     public Documento getIdDocumentoTituloValor() {
         return idDocumentoTituloValor;
     }
 
     public void setIdDocumentoTituloValor(Documento idDocumentoTituloValor) {
         this.idDocumentoTituloValor = idDocumentoTituloValor;
+    }
+
+    public ServPrestamo getServPrestamo() {
+        return servPrestamo;
+    }
+
+    public void setServPrestamo(ServPrestamo servPrestamo) {
+        this.servPrestamo = servPrestamo;
     }
 
     @XmlTransient

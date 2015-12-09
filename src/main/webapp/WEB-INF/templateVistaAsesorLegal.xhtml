@@ -16,23 +16,29 @@
     <h:body>
         <p:layout fullPage="true">
             <!--Top-->
-            <p:layoutUnit position="north" size="100" resizable="true" closable="false" collapsible="false">
-                top
+            <p:layoutUnit position="north" size="100" resizable="false" closable="false" collapsible="false">
+                <div>
+                    <img src="images/LogotipoEmpresa.jpg" width="80" height="60" style="float: left;" />
+                    <h2>Bienvenido #{loginBean.nombreUsuario}</h2>
+                    <h3>#{loginBean.nombreRol}</h3>
+
+                </div>
             </p:layoutUnit>
 
             <!--Left-->
             <p:layoutUnit position="west" size="260" collapsible="false">                    
                 <h:form>
-                    <p:growl autoUpdate="true"/>
+                    <p:growl id="messagesGrows" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true" life="15000"/>
 
                     <p:menu style="width: 240px">
+                        <p:menuitem value="Inicio" action="inicio_AL"/>
                         <p:submenu label="Gestión de Clientes">
-                            <p:menuitem value="Cliente Natural" actionListener="#{menuView.save}"/>
-                            <p:menuitem value="Cliente Juridico" actionListener="#{menuView.update}" />
+                            <p:menuitem value="Cliente Natural" action="clienteNatural"/>
+                            <p:menuitem value="Cliente Juridico" action="clienteJuridico" />
                         </p:submenu>
                         <p:submenu label="Gestión de Deudores">
-                            <p:menuitem value="Deudor Natural" actionListener="#{menuView.delete}"/>
-                            <p:menuitem value="Deudor Juridico" actionListener="#{menuView.delete}"/>
+                            <p:menuitem value="Deudor Natural" action="deudorNatural"/>
+                            <p:menuitem value="Deudor Juridico" action="dedorJuridico"/>
                         </p:submenu>
                     </p:menu>
                 </h:form>

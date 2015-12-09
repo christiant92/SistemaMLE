@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Embeddable
 public class CuotaPagoPK implements Serializable {

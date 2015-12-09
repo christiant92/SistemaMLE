@@ -22,13 +22,41 @@ public class BeanLogin implements Serializable {
     private String user;
     private String password;
     private String mensaje;
+    private String nombreUsuario;
+    private int idRol;
+    private String rol;
     
-    public BeanLogin () {}
+    public BeanLogin () {
+    }
     
     public IFaceLogin getLoginService() {
         return loginService;
     }
 
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public int getRol() {
+        return idRol;
+    }
+
+    public void setRol(int idRol) {
+        this.idRol = idRol;
+    }
+
+    public String getNombreRol() {
+        return rol;
+    }
+
+    public void setNombreRol(String rol) {
+        this.rol = rol;
+    }
+        
     public void setLoginService(IFaceLogin loginService) {
         this.loginService = loginService;
     }
@@ -48,7 +76,7 @@ public class BeanLogin implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public String getMensaje() {
         return mensaje;
     }
@@ -66,6 +94,26 @@ public class BeanLogin implements Serializable {
             Utilidades.addMsgError("Error en validar usuario.", e.getMsgException());
         }
         
-        return "regProcesoJudicial.xhtml";
+        if (idRol == 1) {
+            rol = "Asesor Legal";
+            return "inicio_AL"; // asesor legal 
+        } 
+        else if (idRol == 2) {
+            rol = "Abogado";
+            return "inicio_A"; // abogado
+        }
+        else if (idRol == 3) {
+            rol = "Procurador Social";
+            return "inicio_PS"; // procurador social
+        }
+        else if (idRol == 4) {
+            rol = "Procurador Cobranzas";
+            return "inicio_PC"; // procurador de cobranzas
+        }
+        else if (idRol == 5) {
+            rol = "Cliente";
+            return "inicio_C"; // cliente
+        }
+        else return "error";
     }
 }

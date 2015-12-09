@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "cliente", catalog = "sistemamle", schema = "")
@@ -69,9 +69,9 @@ public class Cliente implements Serializable {
     @Column(name = "Email")
     private String email;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private Clientenatural clientenatural;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Clientejuridico clientejuridico;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private Clientenatural clientenatural;
 
     public Cliente() {
     }
@@ -137,20 +137,20 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    public Clientenatural getClientenatural() {
-        return clientenatural;
-    }
-
-    public void setClientenatural(Clientenatural clientenatural) {
-        this.clientenatural = clientenatural;
-    }
-
     public Clientejuridico getClientejuridico() {
         return clientejuridico;
     }
 
     public void setClientejuridico(Clientejuridico clientejuridico) {
         this.clientejuridico = clientejuridico;
+    }
+
+    public Clientenatural getClientenatural() {
+        return clientenatural;
+    }
+
+    public void setClientenatural(Clientenatural clientenatural) {
+        this.clientenatural = clientenatural;
     }
 
     @Override

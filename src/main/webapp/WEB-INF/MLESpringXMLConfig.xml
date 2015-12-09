@@ -45,10 +45,18 @@
     
     <!-- DAOS -->
     <bean id="loginDAO" class="com.mle.sistema.dao.DAOLogin"/>
+    <bean id="bienesDAO" class="com.mle.sistema.dao.DAOBienes"/>
+    <bean id="consultaBienesDAO" class="com.mle.sistema.dao.DAOConsultaBienes"/>
     
     <!-- Servicios -->
     <bean id="serviceLogin" class="com.mle.sistema.servicios.ServicioLogin">
         <property name="daoLogin" ref="loginDAO"></property>
+    </bean>
+    <bean id="serviceBienes" class="com.mle.sistema.servicios.ServicioBienes">
+        <property name="daoBienes" ref="bienesDAO"></property>
+    </bean>
+    <bean id="serviceConsultaBienes" class="com.mle.sistema.servicios.ServicioConsultaBienes">
+        <property name="daoConsultaBienes" ref="consultaBienesDAO"></property>
     </bean>
         
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

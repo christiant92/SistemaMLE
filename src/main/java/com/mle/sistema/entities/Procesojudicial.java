@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "procesojudicial", catalog = "sistemamle", schema = "")
@@ -86,19 +86,19 @@ public class Procesojudicial implements Serializable {
     @NotNull
     @Column(name = "Archivado")
     private boolean archivado;
-    @JoinColumn(name = "Pagare_idPagare", referencedColumnName = "idPagare")
-    @ManyToOne(optional = false)
-    private Pagare pagareidPagare;
-    @JoinColumn(name = "CodigoCautelar", referencedColumnName = "Codigo Cautelar")
-    @ManyToOne
-    private Medidacautelar codigoCautelar;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesojudicial")
+    private List<Actividad> actividadList;
     @JoinColumns({
         @JoinColumn(name = "Juzgado_idJuzgado", referencedColumnName = "idJuzgado"),
         @JoinColumn(name = "Id_LugarJuzgado", referencedColumnName = "idLugarJuzgado")})
     @ManyToOne(optional = false)
     private Juzgado juzgado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesojudicial")
-    private List<Actividad> actividadList;
+    @JoinColumn(name = "CodigoCautelar", referencedColumnName = "Codigo Cautelar")
+    @ManyToOne
+    private Medidacautelar codigoCautelar;
+    @JoinColumn(name = "Pagare_idPagare", referencedColumnName = "idPagare")
+    @ManyToOne(optional = false)
+    private Pagare pagareidPagare;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "procesojudicial")
     private List<Programacion> programacionList;
 
@@ -191,20 +191,13 @@ public class Procesojudicial implements Serializable {
         this.archivado = archivado;
     }
 
-    public Pagare getPagareidPagare() {
-        return pagareidPagare;
+    @XmlTransient
+    public List<Actividad> getActividadList() {
+        return actividadList;
     }
 
-    public void setPagareidPagare(Pagare pagareidPagare) {
-        this.pagareidPagare = pagareidPagare;
-    }
-
-    public Medidacautelar getCodigoCautelar() {
-        return codigoCautelar;
-    }
-
-    public void setCodigoCautelar(Medidacautelar codigoCautelar) {
-        this.codigoCautelar = codigoCautelar;
+    public void setActividadList(List<Actividad> actividadList) {
+        this.actividadList = actividadList;
     }
 
     public Juzgado getJuzgado() {
@@ -215,13 +208,20 @@ public class Procesojudicial implements Serializable {
         this.juzgado = juzgado;
     }
 
-    @XmlTransient
-    public List<Actividad> getActividadList() {
-        return actividadList;
+    public Medidacautelar getCodigoCautelar() {
+        return codigoCautelar;
     }
 
-    public void setActividadList(List<Actividad> actividadList) {
-        this.actividadList = actividadList;
+    public void setCodigoCautelar(Medidacautelar codigoCautelar) {
+        this.codigoCautelar = codigoCautelar;
+    }
+
+    public Pagare getPagareidPagare() {
+        return pagareidPagare;
+    }
+
+    public void setPagareidPagare(Pagare pagareidPagare) {
+        this.pagareidPagare = pagareidPagare;
     }
 
     @XmlTransient

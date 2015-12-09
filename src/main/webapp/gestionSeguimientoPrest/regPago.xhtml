@@ -1,10 +1,106 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../WEB-INF/templateVistaProcCobranzas.xhtml">
+                template="./../WEB-INF/templateVistaProcCobranzas.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        content
+        
+        <h2 align="center">Registro de Pago</h2>
+        
+        <h:panelGrid columns="3" cellpadding="5" >
+                    <!-- <p:outputLabel for="cc" value="Codigo cautelar:" /> -->
+                    <p:inputMask id="cc9" value="#{maskView.taxId}" mask="999999-9999" size="11" maxlength="11"/>
+                    <p:commandButton value="Buscar seg. de Prestamo" actionListener="#{buttonView.button}" id="buscarmc" icon="ui-icon-search" title="Buscar medida cautelar" />
+        </h:panelGrid>
+        
+        <h:form>
+            <p:fieldset legend="Datos del Prestamo" style="margin-bottom:20px">
+                
+                
+                <h:panelGrid columns="4" cellpadding="5" >                    
+                    <p:outputLabel for="cc" value="Prestamista: " />
+                    <p:inputText id="cc" value=""  size="11" maxlength="11" required="true"/>
+                    
+                    <p:outputLabel for="cc1" value="Prestatario: " />
+                    <p:inputText id="cc1" value=""  size="11" maxlength="11" required="true"/>
+                    
+                    
+                    <p:outputLabel for="cc2" value="Monto total:" />
+                    <p:inputText id="cc2" value=""  size="11" maxlength="11" required="true"/>
+                    
+                    <p:outputLabel for="cc3" value="Nº de cuotas:" />
+                    <p:inputText id="cc3" value=""  size="11" maxlength="11" required="true"/>
+                    
+                    
+                    <p:outputLabel for="cc4" value="Tasa de Interes (%):" />
+                    <p:inputText id="cc4" value=""  size="11" maxlength="11" required="true"/>
+                    
+                    <p:outputLabel for="cc5" value="Forma de Cobranza:" />
+                    <p:inputText id="cc5" value=""  size="11" maxlength="11" required="true"/>
+                    
+                    <p:outputLabel for="cal1" value="Fecha de registro:" />
+                    <p:calendar id="cal1" value="#{calendarView.date3}" showOn="button" />
+                    
+                    
+                    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                            <h:outputText value="#{calendarView.date3}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:panelGrid>
+                    </p:dialog>
+                    
+                    
+                </h:panelGrid>
+            </p:fieldset>
+            
+            <p:fieldset legend="Control de Pagos" style="margin-bottom:20px">
+                
+                <h:panelGrid columns="2" cellpadding="5" >
+                    <p:dataTable var="bienes" value="#{dtBasicView.cars}" >
+                        <p:column headerText="Nº">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Monto de Cuota">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Monto de Mora">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Monto Saldado">
+                            <h:outputText value="" />
+                        </p:column>
+                        
+                        <p:column headerText="Estado">
+                            <h:outputText value="" />
+                        </p:column>
+                        
+                        <p:column headerText="Fecha">
+                            <h:outputText value="" />
+                        </p:column>
+                        
+                        <p:column headerText="Ver Titulo Valor">
+                            <h:outputText value="" />
+                        </p:column>
+                         
+                        
+                    </p:dataTable>  
+                    <td align="center">
+                        <p:commandButton value="Agregar Pago" id="limpiar" actionListener="#{buttonView.buttonAction}" icon="ui-icon-pencil" />
+                    </td>
+                </h:panelGrid>
+            </p:fieldset>
+           
+        </h:form>
+        
+        
+        
     </ui:define>
 
 </ui:composition>

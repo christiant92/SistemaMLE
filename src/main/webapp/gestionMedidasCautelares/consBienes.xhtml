@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templateVistaProcSocial.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h2 align="center">Consulta de Bien</h2>
+        
+        <form>
+            <h:outputLabel value="Ingrese el Nro. de Partida: " />
+            <p:inputText id="txtBuscar" style="width:150px" value="#{beanConsultaBienes.nroPartidaBuscar}"/>
+            <p:commandButton icon="ui-icon-search" title="Buscar" onclick="#{beanConsultaBienes.consultarBien()}"/>
+            
+            <p:fieldset legend="Datos del Bien" style="margin-bottom:20px">
+                <h:panelGrid columns="4" cellpadding="5">
+                    <h:outputLabel for="nroPart" value="Nro. de Partida:"/>
+                    <p:inputText  id="nroPart" value="#{beanConsultaBienes.nroPartida}" disabled="true"/>
+                    <h:outputLabel for="tipoProp" value="Tipo de Propietario:"/>
+                    <p:inputText id="tipoProp" value="#{beanConsultaBienes.tipoProp}" disabled="true"/>
+                    <h:outputLabel for="tipoBien"  value="Tipo de Bien:"/>
+                    <p:inputText id="tipoBien" value="#{beanConsultaBienes.tipoBien}" disabled="true" />
+                    <h:outputLabel for="ubicacion" value="Ubicación:"/>
+                    <p:inputText id="ubicacion" value="#{beanConsultaBienes.ubicacion}" disabled="true" size="50"/>
+                    <h:outputLabel for="valor" value="Monto Valorizado (S/.):"/>
+                    <p:inputText id="valor" value="#{beanConsultaBienes.montoVal}" disabled="true"/>
+                    <h:outputLabel for="desc" value="Descripción:"/>
+                    <p:inputTextarea rows="4" cols="33" id="desc" value="#{beanConsultaBienes.desc}" disabled="true"/>
+
+                    <p:commandButton icon="ui-icon-search" value="Ver" />
+                </h:panelGrid>
+            </p:fieldset>
+            <div align="center">
+                <p:commandButton icon="ui-icon-arrowrefresh-1-w" value="Nueva Consulta" />
+            </div>
+        </form>
+    </ui:define>
+
+</ui:composition>

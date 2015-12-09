@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "bien_medidacautelar", catalog = "sistemamle", schema = "")
@@ -38,12 +38,12 @@ public class BienMedidacautelar implements Serializable {
     @NotNull
     @Column(name = "Rango")
     private int rango;
-    @JoinColumn(name = "Codigo Cautelar", referencedColumnName = "Codigo Cautelar", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Medidacautelar medidacautelar;
     @JoinColumn(name = "idBien", referencedColumnName = "idBien", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Bien bien;
+    @JoinColumn(name = "Codigo Cautelar", referencedColumnName = "Codigo Cautelar", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Medidacautelar medidacautelar;
 
     public BienMedidacautelar() {
     }
@@ -77,20 +77,20 @@ public class BienMedidacautelar implements Serializable {
         this.rango = rango;
     }
 
-    public Medidacautelar getMedidacautelar() {
-        return medidacautelar;
-    }
-
-    public void setMedidacautelar(Medidacautelar medidacautelar) {
-        this.medidacautelar = medidacautelar;
-    }
-
     public Bien getBien() {
         return bien;
     }
 
     public void setBien(Bien bien) {
         this.bien = bien;
+    }
+
+    public Medidacautelar getMedidacautelar() {
+        return medidacautelar;
+    }
+
+    public void setMedidacautelar(Medidacautelar medidacautelar) {
+        this.medidacautelar = medidacautelar;
     }
 
     @Override

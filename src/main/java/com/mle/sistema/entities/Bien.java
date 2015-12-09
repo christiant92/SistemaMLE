@@ -20,13 +20,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "bien", catalog = "sistemamle", schema = "")
@@ -47,18 +49,27 @@ public class Bien implements Serializable {
     @Basic(optional = false)
     @Column(name = "idBien")
     private Integer idBien;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Nro_Partida")
-    private Integer nroPartida;
-    @Size(max = 30)
+    private int nroPartida;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "Tipo_Bien")
     private String tipoBien;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Ubicacion")
     private String ubicacion;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "Monto_Valorizado")
-    private Float montoValorizado;
-    @Size(max = 45)
+    private float montoValorizado;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "Tipo_Propietario")
     private String tipoPropietario;
     @Size(max = 45)
@@ -66,8 +77,9 @@ public class Bien implements Serializable {
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bien")
     private List<BienMedidacautelar> bienMedidacautelarList;
+    @Null
     @JoinColumn(name = "Id_Documento", referencedColumnName = "idDocumento")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Documento idDocumento;
 
     public Bien() {
@@ -75,6 +87,15 @@ public class Bien implements Serializable {
 
     public Bien(Integer idBien) {
         this.idBien = idBien;
+    }
+
+    public Bien(Integer idBien, int nroPartida, String tipoBien, String ubicacion, float montoValorizado, String tipoPropietario) {
+        this.idBien = idBien;
+        this.nroPartida = nroPartida;
+        this.tipoBien = tipoBien;
+        this.ubicacion = ubicacion;
+        this.montoValorizado = montoValorizado;
+        this.tipoPropietario = tipoPropietario;
     }
 
     public Integer getIdBien() {
@@ -85,11 +106,11 @@ public class Bien implements Serializable {
         this.idBien = idBien;
     }
 
-    public Integer getNroPartida() {
+    public int getNroPartida() {
         return nroPartida;
     }
 
-    public void setNroPartida(Integer nroPartida) {
+    public void setNroPartida(int nroPartida) {
         this.nroPartida = nroPartida;
     }
 
@@ -109,11 +130,11 @@ public class Bien implements Serializable {
         this.ubicacion = ubicacion;
     }
 
-    public Float getMontoValorizado() {
+    public float getMontoValorizado() {
         return montoValorizado;
     }
 
-    public void setMontoValorizado(Float montoValorizado) {
+    public void setMontoValorizado(float montoValorizado) {
         this.montoValorizado = montoValorizado;
     }
 

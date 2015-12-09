@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "lugarjuzgado", catalog = "sistemamle", schema = "")

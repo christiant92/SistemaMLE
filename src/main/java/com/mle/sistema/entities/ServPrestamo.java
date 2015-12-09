@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "serv_prestamo", catalog = "sistemamle", schema = "")
@@ -101,15 +101,15 @@ public class ServPrestamo implements Serializable {
     private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "servPrestamo")
     private List<Cuota> cuotaList;
-    @JoinColumn(name = "Deudor_idAval", referencedColumnName = "DNI")
-    @ManyToOne
-    private Deudor deudoridAval;
-    @JoinColumn(name = "Deudor_idDeudor", referencedColumnName = "DNI")
-    @ManyToOne(optional = false)
-    private Deudor deudoridDeudor;
     @JoinColumn(name = "ClienteNatural_idCliente", referencedColumnName = "Cliente_idCliente")
     @ManyToOne(optional = false)
     private Clientenatural clienteNaturalidCliente;
+    @JoinColumn(name = "Deudor_idDeudor", referencedColumnName = "DNI")
+    @ManyToOne(optional = false)
+    private Deudor deudoridDeudor;
+    @JoinColumn(name = "Deudor_idAval", referencedColumnName = "DNI")
+    @ManyToOne
+    private Deudor deudoridAval;
 
     public ServPrestamo() {
     }
@@ -229,12 +229,12 @@ public class ServPrestamo implements Serializable {
         this.cuotaList = cuotaList;
     }
 
-    public Deudor getDeudoridAval() {
-        return deudoridAval;
+    public Clientenatural getClienteNaturalidCliente() {
+        return clienteNaturalidCliente;
     }
 
-    public void setDeudoridAval(Deudor deudoridAval) {
-        this.deudoridAval = deudoridAval;
+    public void setClienteNaturalidCliente(Clientenatural clienteNaturalidCliente) {
+        this.clienteNaturalidCliente = clienteNaturalidCliente;
     }
 
     public Deudor getDeudoridDeudor() {
@@ -245,12 +245,12 @@ public class ServPrestamo implements Serializable {
         this.deudoridDeudor = deudoridDeudor;
     }
 
-    public Clientenatural getClienteNaturalidCliente() {
-        return clienteNaturalidCliente;
+    public Deudor getDeudoridAval() {
+        return deudoridAval;
     }
 
-    public void setClienteNaturalidCliente(Clientenatural clienteNaturalidCliente) {
-        this.clienteNaturalidCliente = clienteNaturalidCliente;
+    public void setDeudoridAval(Deudor deudoridAval) {
+        this.deudoridAval = deudoridAval;
     }
 
     @Override

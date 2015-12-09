@@ -1,10 +1,195 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../WEB-INF/templateVistaAsesorLegal.xhtml">
+                template="./../WEB-INF/templateVistaAsesorLegal.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        content
+        <h:form>
+            <p style="color: black"> 
+                <h2 align="center">Lista de Deudores MLE</h2>
+            </p>
+
+            <p:dataTable var="car" value="#{dtFilterView.cars}" widgetVar="carsTable"
+                         emptyMessage="No hay datos encontrados." filteredValue="#{dtFilterView.filteredCars}"
+                         selectionMode="single" selection="#{dtSelectionView.selectedCar}" 
+                         rowKey="#{car.id}">
+
+                <f:facet name="header" >
+                    <p:outputPanel>
+                        <div align="left" style="height: 10px; padding-top: 3px;">
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton value="Agregar" id="btnAgregar" onclick="PF('dlg1').show();" icon="ui-icon-disk" /> &nbsp;
+                            <p:commandButton value="Editar" id="btnEditar" onclick="PF('dlg2').show();" icon="ui-icon-disk" /> &nbsp;
+                            <p:commandButton value="Eliminar" id="btnEliminar" action="#" update="message">
+                                <p:confirm header="Confirmación" message="¿Estas seguro de eliminar a este cliente?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                        </div>
+
+                        <div align="right">
+                            <h:outputText value="Buscar en todos los campos: "/>
+                            <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:200px" placeholder="Ingrese una palabra"/>
+                        </div>
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column filterBy="#{car.id}" headerText="DNI" filterMatchMode="contains">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+
+                <p:column filterBy="#{car.year}" headerText="Nombres" filterMatchMode="contains">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+
+                <p:column filterBy="#{car.brand}" headerText="Apellidos" filterMatchMode="contains">
+                    <h:outputText value="#{car.brand}" />
+                </p:column>
+
+                <p:column headerText="Dirección">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+
+                <p:column headerText="Provincia">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+
+                <p:column headerText="Distrito">
+                    <h:outputText value="#{car.color}" />
+                </p:column>
+
+                <p:column headerText="Telefono">
+                    <h:outputText value="#{car.sold}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <!--Formulario Agregar Deudor-->
+        <p:dialog id="dlg1" header="Registrar Deudor"  widgetVar="dlg1" height="100%" draggable="false" appendTo="@(body)"  modal="true"  resizable="false" position="center" closeOnEscape="true">
+            <h:form>    
+                <h:panelGrid id="grid" columns="3" cellpadding="2">
+                    <h:outputLabel value="DNI" for="dni" styleClass="RequiredLbl"/>
+                    <h:panelGrid>
+                        <p:focus/>                            <!--Import: Para mostrarse en mensajes de Error-->  
+                        <p:inputText id="dni" label="DNI"  value="#{beanDeudorNatural.dni}" required="true" requiredMessage="El DNI es un campo obligatorio" 
+                                     validatorMessage="El DNI es un número de 8 dígitos" converterMessage="El DNI solo debe contener dígitos" immediate="true">
+                            <f:validateLength minimum="8" maximum="8"/>
+                        </p:inputText>
+                    </h:panelGrid>
+                    <p:message for="dni" />
+
+                    <h:outputLabel value="Nombre" for="nombre" styleClass="RequiredLbl"/>
+                    <p:inputText id="nombre" label="Nombre" value="#{dsad}" required="true" requiredMessage="El nombre es un campo obligatorio" />
+                    <p:message for="nombre" />
+
+                    <h:outputLabel value="Apellidos" for="apellidos" styleClass="RequiredLbl"/>
+                    <p:inputText id="apellidos" label="apellidos" value="#{dsad}" required="true" requiredMessage="El Apellido es un campo obligatorio" />
+                    <p:message for="apellidos" />
+
+                    <h:outputLabel value="Dirección" for="direccion" styleClass="RequiredLbl"/>
+                    <p:inputText id="direccion" label="Dirección" value="#{dsad}" required="true" requiredMessage="Dirección es un campo obligatorio"/>
+                    <p:message for="direccion" />
+
+                    <p:outputLabel for="provincia" value="Provincia" />
+                    <p:selectOneMenu id="provincia" value="#{beanDeudorNatural.provincia}" style="width:100%">
+                        <p:ajax listener="#{beanDeudorNatural.onProvinciaChange}" update="distrito" />
+                        <f:selectItem itemLabel="-- Selecciona Provincia --" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{beanDeudorNatural.provincias}" />
+                    </p:selectOneMenu>
+                    <p:message for="provincia" />
+
+                    <p:outputLabel for="distrito" value="Distrito" />
+                    <p:selectOneMenu id="distrito" value="#{beanDeudorNatural.distrito}" style="width:100%">
+                        <f:selectItem itemLabel="-- Selecciona Distrito --" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{beanDeudorNatural.distritos}" />
+                    </p:selectOneMenu>
+                    <p:message for="distrito" />
+
+                    <h:outputLabel value="Teléfono" for="telefono"  styleClass="RequiredLbl"/>
+                    <p:inputText id="telefono" label="Teléfono" value="#{dsad}" required="true" requiredMessage="Teléfono es un campo obligatorio" />
+                    <p:message for="telefono" display="icon"/>
+                    <h:panelGroup/>
+                    <h:panelGroup/>
+                    <h:panelGroup/>
+
+                    <p:commandButton id="guardar" value="Guardar" action="#{beanDeudorNatural.guardarDeudor}" icon="ui-icon-check"/>   
+                    <p:commandButton value="Cancelar"  type="reset" onclick="PF('dlg1').hide()" icon="ui-icon-close"  />
+                </h:panelGrid>
+                <!--<p:messages/>-->
+            </h:form>
+        </p:dialog>
+
+        <!--Formulario Editar Deudor-->
+        <p:dialog id="dlg2" header="Editar Deudor"  widgetVar="dlg2" height="100%" draggable="false" appendTo="@(body)"  modal="true"  resizable="false" position="center" closeOnEscape="true">
+            <h:form>    
+                <h:panelGrid id="grid" columns="3" cellpadding="2">
+                    <h:outputLabel value="DNI" for="dni" styleClass="RequiredLbl"/>
+                    <h:panelGrid>
+                        <p:focus/>                            <!--Import: Para mostrarse en mensajes de Error-->  
+                        <p:inputText id="dni" label="DNI"  value="#{beanDeudorNatural.dni}" required="true" requiredMessage="El DNI es un campo obligatorio" 
+                                     validatorMessage="El DNI es un número de 8 dígitos" converterMessage="El DNI solo debe contener dígitos" disabled="true" immediate="true">
+                            <f:validateLength minimum="8" maximum="8"/>
+                        </p:inputText>
+                    </h:panelGrid>
+                    <p:message for="dni" />
+
+                    <h:outputLabel value="Nombre" for="nombre" styleClass="RequiredLbl"/>
+                    <p:inputText id="nombre" label="Nombre" value="#{dsad}" required="true" requiredMessage="El nombre es un campo obligatorio" />
+                    <p:message for="nombre" />
+
+                    <h:outputLabel value="Apellidos" for="apellidos" styleClass="RequiredLbl"/>
+                    <p:inputText id="apellidos" label="apellidos" value="#{dsad}" required="true" requiredMessage="El Apellido es un campo obligatorio" />
+                    <p:message for="apellidos" />
+
+                    <h:outputLabel value="Dirección" for="direccion" styleClass="RequiredLbl"/>
+                    <p:inputText id="direccion" label="Dirección" value="#{dsad}" required="true" requiredMessage="Dirección es un campo obligatorio"/>
+                    <p:message for="direccion" />
+
+                    <p:outputLabel for="provincia" value="Provincia" />
+                    <p:selectOneMenu id="provincia" value="#{beanDeudorNatural.provincia}" style="width:100%">
+                        <p:ajax listener="#{beanDeudorNatural.onProvinciaChange}" update="distrito" />
+                        <f:selectItem itemLabel="-- Selecciona Provincia --" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{beanDeudorNatural.provincias}" />
+                    </p:selectOneMenu>
+                    <p:message for="provincia" />
+
+                    <p:outputLabel for="distrito" value="Distrito" />
+                    <p:selectOneMenu id="distrito" value="#{beanDeudorNatural.distrito}" style="width:100%">
+                        <f:selectItem itemLabel="-- Selecciona Distrito --" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{beanDeudorNatural.distritos}" />
+                    </p:selectOneMenu>
+                    <p:message for="distrito" />
+
+                    <h:outputLabel value="Teléfono" for="telefono"  styleClass="RequiredLbl"/>
+                    <p:inputText id="telefono" label="Teléfono" value="#{dsad}" required="true" requiredMessage="Teléfono es un campo obligatorio" />
+                    <p:message for="telefono" display="icon"/>
+                    <h:panelGroup/>
+                    <h:panelGroup/>
+                    <h:panelGroup/>
+
+                    <p:commandButton id="guardar" value="Guardar" action="#{beanDeudorNatural.guardarCliente}" icon="ui-icon-check"/>   
+                    <p:commandButton value="Cancelar"  type="reset" onclick="PF('dlg2').hide()" icon="ui-icon-close"  />
+                </h:panelGrid>
+                <!--<p:messages/>-->
+            </h:form>
+        </p:dialog>
+
+        <!--Formulario Eliminar Deudor-->
+        <h:form>           
+            <p:growl id="message" showDetail="true" />
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                <p:commandButton value="Aceptar" type="button" action="#{beanDeudorNatural.eliminarDeudor}" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
+
+
+
+
+
+
     </ui:define>
 
 </ui:composition>

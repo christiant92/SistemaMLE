@@ -8,24 +8,66 @@
                 xmlns:p="http://primefaces.org/ui">
 
     
-    <ui:define name="content">
+    
+    <ui:define name="top" >                
         <h:form id="formularioLogin">
-            <p:growl id="messagesGrows" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true" life="2000"/>
-            <p:messages id="messagesGlobals" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true"/>
-
-            <p:toolbar>
-                <f:facet name="left">
-                    <img src="images/LogotipoEmpresa.jpg" align="left" width="80" height="60">
-                        <h3 align="top" style="color: black">Sistema de Gestión de Asesoria Legal</h3>
-                    </img>
-                </f:facet>
-
-                <f:facet name="right">
-                    <p:commandButton  value="Ingresar" id="buttonWithIcon" onclick="PF('dlg').show();" icon="ui-icon-arrowthickstop-1-e"/>
-                </f:facet>
-            </p:toolbar>
+            <p:growl id="messagesGrows" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true" life="15000"/>
+            <div>
+                <img src="images/LogotipoEmpresa.jpg" align="left" width="80" height="60" >
+                    <h2 style="color: black" align="left">Sistema de Gestión de Asesoria Legal</h2>
+                </img>
+            </div>
             
-            <!--Ventana emergente para el login-->
+            
+        </h:form>
+    </ui:define>
+            
+    <ui:define name="content">
+        
+        <h:form>
+            <div align="center">
+                <img src="images/presentacion/imagen4.jpg" align="bottom" width="600" height="350" />
+            </div>
+            <p:menubar>
+                <p:submenu label="¿Quienes Somos?" >
+                    <p:menuitem value="Vision" url="#" />
+                    <p:menuitem value="Mision" url="#" />
+                    <p:menuitem value="Nuestra Historia" url="#" />
+                    <p:menuitem value="Planilla Gerencial" url="#" />
+                </p:submenu>
+
+                <p:submenu label="Asesoria Legal Empresarial">
+                    <p:menuitem value="Derecho Juridico" url="#" />
+                    <p:menuitem value="Derecho Laboral" url="#" />
+                    <p:menuitem value="Derecho Tributario" url="#" />
+                </p:submenu>
+
+                <p:submenu label="Tributación Empresarial" >
+                    <p:menuitem value="Analisis Tributario" url="#" />
+                    <p:menuitem value="Impuestos Legales" url="#" />
+                </p:submenu>
+                
+                <p:submenu label="Gestión de Cobranzas" >
+                    <p:menuitem value="Demandas Extrajudiciales" url="#" />
+                    <p:menuitem value="Demandas Judiciales" url="#" />
+                </p:submenu>
+                
+                <p:submenu label="Gestión de Cobranzas" >
+                    <p:menuitem value="Demandas Extrajudiciales" url="#" />
+                    <p:menuitem value="Demandas Judiciales" url="#" />
+                </p:submenu>
+                
+                <p:submenu label="Servicios al Cliente" >
+                    <p:menuitem value="Seguimiento de Prestamos" url="#" />
+                </p:submenu>
+                
+                <f:facet name="options">
+                    <!--<p:inputText style="margin-right:10px" placeholder="Search"/>-->
+                    <p:commandButton  type="button" value="Ingresar" onclick="PF('dlg').show();" icon="ui-icon-arrowthickstop-1-e" />
+                </f:facet>
+            </p:menubar>
+            
+            
             <p:dialog header="Mundo Legal Empresarial" widgetVar="dlg" resizable="false">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="username" value="Usuario:" />
@@ -35,11 +77,12 @@
                     <p:password id="password" value="#{loginBean.password}" required="true" label="password" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="Iniciar Sesión" update="formularioLogin" action="#{loginBean.validarLogin}"/>
+                        <p:commandButton value="Iniciar Sesión" action="#{loginBean.validarLogin}" />
                     </f:facet> 
                 </h:panelGrid>
             </p:dialog>
-            
         </h:form>
+
+
     </ui:define>
 </ui:composition>

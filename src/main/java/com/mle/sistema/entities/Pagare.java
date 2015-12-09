@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "pagare", catalog = "sistemamle", schema = "")
@@ -89,18 +89,18 @@ public class Pagare implements Serializable {
     private String situacionContractual;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pagareidPagare")
     private List<Procesojudicial> procesojudicialList;
-    @JoinColumn(name = "Documento_idDocumento", referencedColumnName = "idDocumento")
-    @ManyToOne
-    private Documento documentoidDocumento;
-    @JoinColumn(name = "Deudor_idAval", referencedColumnName = "DNI")
-    @ManyToOne
-    private Deudor deudoridAval;
-    @JoinColumn(name = "Deudor_idDeudor", referencedColumnName = "DNI")
-    @ManyToOne(optional = false)
-    private Deudor deudoridDeudor;
     @JoinColumn(name = "Cliente_idCliente", referencedColumnName = "Cliente_idCliente")
     @ManyToOne(optional = false)
     private Clientejuridico clienteidCliente;
+    @JoinColumn(name = "Deudor_idDeudor", referencedColumnName = "DNI")
+    @ManyToOne(optional = false)
+    private Deudor deudoridDeudor;
+    @JoinColumn(name = "Deudor_idAval", referencedColumnName = "DNI")
+    @ManyToOne
+    private Deudor deudoridAval;
+    @JoinColumn(name = "Documento_idDocumento", referencedColumnName = "idDocumento")
+    @ManyToOne
+    private Documento documentoidDocumento;
 
     public Pagare() {
     }
@@ -201,20 +201,12 @@ public class Pagare implements Serializable {
         this.procesojudicialList = procesojudicialList;
     }
 
-    public Documento getDocumentoidDocumento() {
-        return documentoidDocumento;
+    public Clientejuridico getClienteidCliente() {
+        return clienteidCliente;
     }
 
-    public void setDocumentoidDocumento(Documento documentoidDocumento) {
-        this.documentoidDocumento = documentoidDocumento;
-    }
-
-    public Deudor getDeudoridAval() {
-        return deudoridAval;
-    }
-
-    public void setDeudoridAval(Deudor deudoridAval) {
-        this.deudoridAval = deudoridAval;
+    public void setClienteidCliente(Clientejuridico clienteidCliente) {
+        this.clienteidCliente = clienteidCliente;
     }
 
     public Deudor getDeudoridDeudor() {
@@ -225,12 +217,20 @@ public class Pagare implements Serializable {
         this.deudoridDeudor = deudoridDeudor;
     }
 
-    public Clientejuridico getClienteidCliente() {
-        return clienteidCliente;
+    public Deudor getDeudoridAval() {
+        return deudoridAval;
     }
 
-    public void setClienteidCliente(Clientejuridico clienteidCliente) {
-        this.clienteidCliente = clienteidCliente;
+    public void setDeudoridAval(Deudor deudoridAval) {
+        this.deudoridAval = deudoridAval;
+    }
+
+    public Documento getDocumentoidDocumento() {
+        return documentoidDocumento;
+    }
+
+    public void setDocumentoidDocumento(Documento documentoidDocumento) {
+        this.documentoidDocumento = documentoidDocumento;
     }
 
     @Override

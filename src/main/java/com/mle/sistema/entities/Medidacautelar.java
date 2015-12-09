@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "medidacautelar", catalog = "sistemamle", schema = "")
@@ -54,10 +54,10 @@ public class Medidacautelar implements Serializable {
     @Column(name = "F_Formalizacion_MC")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fFormalizacionMC;
-    @OneToMany(mappedBy = "codigoCautelar")
-    private List<Procesojudicial> procesojudicialList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "medidacautelar")
     private List<BienMedidacautelar> bienMedidacautelarList;
+    @OneToMany(mappedBy = "codigoCautelar")
+    private List<Procesojudicial> procesojudicialList;
 
     public Medidacautelar() {
     }
@@ -99,21 +99,21 @@ public class Medidacautelar implements Serializable {
     }
 
     @XmlTransient
-    public List<Procesojudicial> getProcesojudicialList() {
-        return procesojudicialList;
-    }
-
-    public void setProcesojudicialList(List<Procesojudicial> procesojudicialList) {
-        this.procesojudicialList = procesojudicialList;
-    }
-
-    @XmlTransient
     public List<BienMedidacautelar> getBienMedidacautelarList() {
         return bienMedidacautelarList;
     }
 
     public void setBienMedidacautelarList(List<BienMedidacautelar> bienMedidacautelarList) {
         this.bienMedidacautelarList = bienMedidacautelarList;
+    }
+
+    @XmlTransient
+    public List<Procesojudicial> getProcesojudicialList() {
+        return procesojudicialList;
+    }
+
+    public void setProcesojudicialList(List<Procesojudicial> procesojudicialList) {
+        this.procesojudicialList = procesojudicialList;
     }
 
     @Override

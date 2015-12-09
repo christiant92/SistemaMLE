@@ -1,10 +1,162 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../WEB-INF/templateVistaAbogado.xhtml">
-
+                template="./../WEB-INF/templateVistaAbogado.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- 
+    originalmente estaba: templateVistaAbogado.xhtml
+    -->
+    
     <ui:define name="content">
-        content
+        
+            
+               
+        <h:form >
+        <p:panelGrid columns="4"  style=" margin: 0 auto;" >
+            <f:facet name="header">
+            Detalle del Prestamista
+            </f:facet>
+            <p:commandButton type="button" value="Buscar Cliente" />
+            <h:outputLabel for="b" value="" />            
+            <h:outputLabel for="b" value="" />
+            <h:outputLabel for="b" value="" />
+            
+            <h:outputLabel for="Nombres" value="Nombres: " />
+            <p:inputText value="" />
+            <h:outputLabel for="Apellidos" value="Apellidos: " />
+            <p:inputText value="" />
+            
+            <h:outputLabel for="Nombres" value="DNI: " />
+            <p:inputText value="" />
+            <h:outputLabel for="Nombres" value="Teléfono: " />
+            <p:inputText value="" />
+            
+            <h:outputLabel for="Nombres" value="Dirección: " />
+            <p:inputText value="" />
+            <h:outputLabel for="b" value="" />
+            <h:outputLabel for="b" value="" />
+        </p:panelGrid>  
+            
+        <p:panelGrid columns="4" style="margin: 0 auto;" >    
+            <f:facet name="header">
+            Detalle del Prestatario
+            </f:facet>            
+            <p:commandButton type="button" value="Buscar Deudor" />
+            <h:outputLabel for="b" value="" />            
+            <h:outputLabel for="b" value="" />
+            <h:outputLabel for="b" value="" />
+            
+            <h:outputLabel for="Nombres" value="Nombres: " />
+            <p:inputText value="" />
+            <h:outputLabel for="Apellidos" value="Apellidos: " />
+            <p:inputText value="" />
+            
+            <h:outputLabel for="Nombres" value="DNI: " />
+            <p:inputText value="" />
+            <h:outputLabel for="Nombres" value="Teléfono: " />
+            <p:inputText value="" />
+            
+            <h:outputLabel for="Nombres" value="Dirección: " />
+            <p:inputText value="" />
+            <h:outputLabel for="b" value="" />
+            <h:outputLabel for="b" value="" />
+            
+            <h:outputLabel for="Nombres" value="Aval: " />
+            <p:inputText value="" />
+            <p:commandButton type="button" value="Buscar Aval" />
+            <h:outputLabel for="b" value="" />
+         </p:panelGrid>   
+            
+        <p:panelGrid columns="4"  style="margin: 0 auto;"  >    
+            <f:facet name="header">
+            Detalle del Prestamo
+            </f:facet>      
+            <h:outputLabel for="Nombres" value="Monto del prestamo: " />
+            <p:inputText value="" />
+            <h:outputLabel for="Apellidos" value="Tasa de interes (%): " />
+            <p:inputText value="" />
+            <h:outputLabel for="Nombres" value="Nro Cuotas: " />
+            <p:inputText value="" />
+            
+            <h:outputLabel for="Nombres" value="Monto de cuota: " />
+            <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
+                <f:selectItem itemLabel="Select One" itemValue="" />
+                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+            </p:selectOneMenu>
+            
+            
+            <h:outputLabel for="Nombres" value="Fecha inicial de pago: " />
+            <h:outputText value="#{calendarView.date9}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            
+            <h:outputLabel for="Nombres" value="Forma de Cobranza: " />
+            <p:selectOneMenu id="console2" value="#{selectOneMenuView.console}" style="width:125px">
+                <f:selectItem itemLabel="Select One" itemValue="" />
+                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+            </p:selectOneMenu>
+            
+            <h:outputLabel for="Nombres" value="Tipo de moneda: " />
+            <p:selectOneMenu id="console3" value="#{selectOneMenuView.console}" style="width:125px">
+                <f:selectItem itemLabel="Select One" itemValue="" />
+                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+            </p:selectOneMenu>
+            
+            <h:outputLabel for="Apellidos" value="Periodo de Cobranza: " />
+            <p:selectOneMenu id="console4" value="#{selectOneMenuView.console}" style="width:125px">
+                <f:selectItem itemLabel="Select One" itemValue="" />
+                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+            </p:selectOneMenu>
+                        
+        </p:panelGrid>
+            
+        <p:outputPanel id="customPanel" style="margin-bottom:10px">
+            <p:selectOneRadio id="customRadio" value="" layout="custom">
+                <f:selectItem itemLabel="Red" itemValue="Red" />
+                <f:selectItem itemLabel="Green" itemValue="Green" />
+                <f:selectItem itemLabel="Blue" itemValue="Blue" />
+            </p:selectOneRadio>
+
+            <h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;"  >
+                <f:facet name="header">
+                    Especificaciones de Mora  
+                </f:facet> 
+                <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+                <h:outputLabel for="opt1" value="Ninguno" />
+                <h:outputLabel for="opt3" value="" />
+
+                <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+                <h:outputLabel for="opt2" value="Tasa ejectiva diaria (%)" />
+                <p:inputText />
+
+                <p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+                <h:outputLabel for="opt3" value="Monto fijo" />
+                <p:calendar />
+            </h:panelGrid>
+        </p:outputPanel>
+
+            <h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;"  >
+                <p:commandButton type="button" value="Registrar" />
+                <p:commandButton type="button" value="Limipar" />
+            </h:panelGrid>
+            
+            
+        </h:form>
+        
+        
+       
+        
+        
     </ui:define>
 
 </ui:composition>

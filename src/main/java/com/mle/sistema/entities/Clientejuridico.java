@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "clientejuridico", catalog = "sistemamle", schema = "")
@@ -51,11 +51,11 @@ public class Clientejuridico implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "Razon Social")
     private String razonSocial;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteidCliente")
-    private List<Pagare> pagareList;
     @JoinColumn(name = "Cliente_idCliente", referencedColumnName = "idCliente", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Cliente cliente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteidCliente")
+    private List<Pagare> pagareList;
 
     public Clientejuridico() {
     }
@@ -94,6 +94,14 @@ public class Clientejuridico implements Serializable {
         this.razonSocial = razonSocial;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     @XmlTransient
     public List<Pagare> getPagareList() {
         return pagareList;
@@ -101,14 +109,6 @@ public class Clientejuridico implements Serializable {
 
     public void setPagareList(List<Pagare> pagareList) {
         this.pagareList = pagareList;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     @Override

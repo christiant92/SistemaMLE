@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "documento", catalog = "sistemamle", schema = "")
@@ -43,16 +43,16 @@ public class Documento implements Serializable {
     @Size(max = 45)
     @Column(name = "TipoDocumento")
     private String tipoDocumento;
+    @OneToMany(mappedBy = "idDocumentoTituloValor")
+    private List<Cuota> cuotaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documento")
+    private List<Imagen> imagenList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDocumentoVoucherCheque")
     private List<Pago> pagoList;
     @OneToMany(mappedBy = "documentoidDocumento")
     private List<Pagare> pagareList;
-    @OneToMany(mappedBy = "idDocumentoTituloValor")
-    private List<Cuota> cuotaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDocumento")
+    @OneToMany(mappedBy = "idDocumento")
     private List<Bien> bienList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documento")
-    private List<Imagen> imagenList;
 
     public Documento() {
     }
@@ -78,6 +78,24 @@ public class Documento implements Serializable {
     }
 
     @XmlTransient
+    public List<Cuota> getCuotaList() {
+        return cuotaList;
+    }
+
+    public void setCuotaList(List<Cuota> cuotaList) {
+        this.cuotaList = cuotaList;
+    }
+
+    @XmlTransient
+    public List<Imagen> getImagenList() {
+        return imagenList;
+    }
+
+    public void setImagenList(List<Imagen> imagenList) {
+        this.imagenList = imagenList;
+    }
+
+    @XmlTransient
     public List<Pago> getPagoList() {
         return pagoList;
     }
@@ -96,30 +114,12 @@ public class Documento implements Serializable {
     }
 
     @XmlTransient
-    public List<Cuota> getCuotaList() {
-        return cuotaList;
-    }
-
-    public void setCuotaList(List<Cuota> cuotaList) {
-        this.cuotaList = cuotaList;
-    }
-
-    @XmlTransient
     public List<Bien> getBienList() {
         return bienList;
     }
 
     public void setBienList(List<Bien> bienList) {
         this.bienList = bienList;
-    }
-
-    @XmlTransient
-    public List<Imagen> getImagenList() {
-        return imagenList;
-    }
-
-    public void setImagenList(List<Imagen> imagenList) {
-        this.imagenList = imagenList;
     }
 
     @Override

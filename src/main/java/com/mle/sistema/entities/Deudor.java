@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author christian
+ * @author Christian
  */
 @Entity
 @Table(name = "deudor", catalog = "sistemamle", schema = "")
@@ -65,13 +65,13 @@ public class Deudor implements Serializable {
     @Size(max = 45)
     @Column(name = "Provincia")
     private String provincia;
-    @OneToMany(mappedBy = "deudoridAval")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "deudoridDeudor")
     private List<Pagare> pagareList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "deudoridDeudor")
-    private List<Pagare> pagareList1;
     @OneToMany(mappedBy = "deudoridAval")
-    private List<ServPrestamo> servPrestamoList;
+    private List<Pagare> pagareList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deudoridDeudor")
+    private List<ServPrestamo> servPrestamoList;
+    @OneToMany(mappedBy = "deudoridAval")
     private List<ServPrestamo> servPrestamoList1;
 
     public Deudor() {

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/templateVistaProcCobranzas.xhtml">
+
+            <ui:define name="content">
+                <h2 align="center">Consulta de Seguimiento de Prestamo</h2>
+                <h3 align="center">Detalle de Cuota</h3>
+        <h:form>
+            <p:fieldset legend="Cuota Nro 1" style="margin-bottom:20px">
+                
+                <h:panelGrid columns="4" cellpadding="5" >
+                    <p:outputLabel for="cc1" value="Monto de cuota:" />
+                    <p:inputText id="cc1"   size="40" maxlength="11"/>
+                    
+                    <p:outputLabel for="cc2" value="Monto saldado" />
+                    <p:inputText id="cc2"   size="40" maxlength="11"/>
+                    
+                    <p:outputLabel for="cc3" value="Monto de mora" />
+                    <p:inputText id="cc3"   size="11" maxlength="11"/>
+                    
+                    <p:outputLabel for="cc4" value="Fecha:" />
+                    <p:calendar id="cc4" value="#{calendarView.date3}" showOn="button" />
+                    
+                    <p:outputLabel for="cc5" value="Estado:" />
+                    <p:inputText id="cc5"   size="11" maxlength="11"/>
+                    
+                    <p:commandButton value="Ver Titulo Valor" id="ver1" actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" />
+            
+                    
+                    
+                                  
+                    
+                    
+                </h:panelGrid>
+            </p:fieldset>
+            
+            <p:fieldset legend="Pagos Registrados" style="margin-bottom:20px">
+                
+                <h:panelGrid columns="2" cellpadding="5" >
+                    <p:dataTable var="bienes" value="#{dtBasicView.cars}" >
+                        <p:column headerText="Nro Pago">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Nro Operacion/Cheque">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Monto">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Fecha">
+                            <h:outputText value="" />
+                        </p:column>
+                        
+                        <p:column headerText="Ver Comprobante">
+                            <h:outputText value="" />
+                        </p:column>
+                        
+                        
+                    </p:dataTable>   
+                    
+                </h:panelGrid>
+            </p:fieldset>
+            <td align="center">
+                        <p:commandButton value="Cerrar" id="ver" actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" />
+            </td>
+        </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

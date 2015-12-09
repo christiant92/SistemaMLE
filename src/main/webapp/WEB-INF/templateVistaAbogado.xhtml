@@ -17,31 +17,37 @@
     <h:body>
         <p:layout fullPage="true">
                 <!--Top-->
-                <p:layoutUnit position="north" size="100" resizable="true" closable="false" collapsible="false">
-                    top
+                <p:layoutUnit position="north" size="100" resizable="false" closable="false" collapsible="false">
+                    <div>
+                    <img src="images/LogotipoEmpresa.jpg" width="80" height="60" style="float: left;" />
+                    <h2>Bienvenido #{loginBean.nombreUsuario}</h2>
+                    <h3>#{loginBean.nombreRol}</h3>
+                    
+                    </div>
                 </p:layoutUnit>
                 
                 <!--Left-->
                 <p:layoutUnit position="west" size="260" collapsible="false">                    
                     <h:form>
-                        <p:growl autoUpdate="true"/>
+                        <p:growl id="messagesGrows" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true" life="15000"/>
 
                         <p:menu style="width: 240px">
-                            <p:submenu label="Gestión de Procesos Judiciales">
-                                <p:menuitem value="Registrar Proceso Judicial" action="regProcesoJudicial.xhtml"/>
-                                <p:menuitem value="Modificar Proceso Judicial" action="modProcesoJudicial.xhtml" />
-                                <p:menuitem value="Registrar Pagaré" action="regPagare-xhtml" />
-                                <p:menuitem value="Consultar Proceso Judicial" action="consultarPJ_A.xhtml" />
+                            <p:menuitem value="Inicio" action="inicio_A"/>
+                            <p:submenu label="Gestión de Procesos Judiciales" >
+                                <p:menuitem value="Registrar Proceso Judicial" action="regProcesoJudicial"/>
+                                <p:menuitem value="Modificar Proceso Judicial" action="modProcesoJudicial" />
+                                <p:menuitem value="Registrar Pagaré" action="regPagare" />
+                                <p:menuitem value="Consultar Proceso Judicial" action="consultarPJ_A" />
                             </p:submenu>
                             <p:submenu label="Gestión de Medidas Cautelares">
-                                <p:menuitem value="Registrar Medida Cautelar" actionListener="#{menuView.delete}"/>
-                                <p:menuitem value="Modificar Medida Cautelar" actionListener="#{menuView.delete}"/>
-                                <p:menuitem value="Consultar Medida Cautelar" actionListener="#{menuView.delete}"/>
+                                <p:menuitem value="Registrar Medida Cautelar" action="regMedidaCautelar"/>
+                                <p:menuitem value="Modificar Medida Cautelar" action="modMedidaCautelar"/>
+                                <p:menuitem value="Consultar Medida Cautelar" action="consMedidaCautelar_A"/>
                             </p:submenu>
-                            <p:submenu label="Reportes y Estadisticas">
-                                <p:menuitem value="Reporte de Procesos Judiciales" actionListener="#{menuView.delete}"/>
-                                <p:menuitem value="Reporte de Medidas Cautelares" actionListener="#{menuView.delete}"/>
-                                <p:menuitem value="Estadisticas Anuales" actionListener="#{menuView.delete}"/>
+                            <p:submenu label="Gestión de Seguimiento de Préstamos">
+                                <p:menuitem value="Registrar Seguimiento de Préstamos" action="regSegPres"/>
+                                <p:menuitem value="Modificar Seguimiento de Préstamos" action="modSegPres"/>
+                                <p:menuitem value="Consultar Seguimiento de Préstamos" action="consSegPres_A"/>
                             </p:submenu>
                         </p:menu>
                     </h:form>
