@@ -1,10 +1,81 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../WEB-INF/templateVistaAbogado.xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="./../WEB-INF/templateVistaAbogado.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
 
     <ui:define name="content">
-        conssegprest
+        <h2 align="center">Consulta de Seguimiento de Prestamo</h2>
+
+        <p:growl id="messagesGrows" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true" life="15000"/>
+
+
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="5" >
+                <p:inputText  value="#{consultarSeguimientoPrestamoBean.txt_idServ_Prestamo}" size="11" maxlength="11"/>
+                <p:commandButton value="Buscar seg. de Prestamo" update="grid_servPrestamo" actionListener="#{consultarSeguimientoPrestamoBean.buscarServPrestamos()}" id="buscarsp" icon="ui-icon-search" />
+            </h:panelGrid>
+
+
+            <p:fieldset legend="Datos del Prestamo" style="margin-bottom:20px">
+                <p:dataGrid id="grid_servPrestamo"  value="#{consultarSeguimientoPrestamoBean.listaServPrestamos}" var="servPrestamos" >
+                    <h:panelGrid columns="4" cellpadding="5" >
+                        <p:outputLabel  value="Codigo de Prestamo:" />
+                        <p:inputText id="txtCodigoPrestamo"   size="40" maxlength="11" value="#{servPrestamos.idServPrestamo}" />
+                        <p:outputLabel  value="Prestamista:" />
+                        <p:inputText id="txtPrestamista"   size="40" maxlength="11" value="#{servPrestamos.clienteNaturalidCliente.apellidos}"/>
+                        <p:outputLabel  value="Prestatario:" />
+                        <p:inputText id="txtPrestatario"   size="11" maxlength="11" value="#{servPrestamos.deudoridDeudor.apellidos}"/>
+                        <p:outputLabel  value="Fecha de Registro:" />
+                        <p:calendar id="calFechaRegistro" value="#{servPrestamos.fecharegistro}" showOn="button"  />
+                        <p:outputLabel  value="Monto Total:" />
+                        <p:inputText id="txtMontoTotal"   size="11" maxlength="11" value="#{servPrestamos.montoTotal}"/>
+                        <p:outputLabel  value="Monto de c/cuota:" />
+                        <p:inputText id="txtMontoCuota"   size="11" maxlength="11" value="#{servPrestamos.montocuota}"/>
+                        <p:outputLabel  value="Tasa de interes (%):" />
+                        <p:inputText id="txtTasaInteres"   size="11" maxlength="11" value="#{servPrestamos.tasaInteres}"/>
+                        <p:outputLabel  value="Forma de cobranza:" />
+                        <p:inputText id="txtFormaCobranza"   size="11" maxlength="11" value="#{servPrestamos.formaCobranza}"/>
+                        <p:outputLabel  value="Nro de cuota:" />
+                        <p:inputText id="txtNroCuota"   size="11" maxlength="11" value="#{servPrestamos.numCuotas}"/>
+                    </h:panelGrid>
+
+
+
+                    <p:fieldset legend="Control de Pagos" style="margin-bottom:20px">
+                        <h:panelGrid columns="2" cellpadding="5" >
+                            <p:dataTable var="cuota" value="#{consultarSeguimientoPrestamoBean.listaCuotas}" >
+                                <p:column headerText="Nro de cuota">
+                                    <h:outputText value="#{cuota.cuotaPK.numCuota}" />
+                                </p:column>
+                                <p:column headerText="Monto Saldado">
+                                    <h:outputText value="#{cuota.montosaldado}" />
+                                </p:column>
+                                <p:column headerText="Fecha">
+                                    <h:outputText value="#{cuota.fechacuota}" />
+                                </p:column>
+                                <p:column headerText="Estado">
+                                    <h:outputText value="#{cuota.estado}" />
+                                </p:column>                        
+                            </p:dataTable>   
+                            <td align="center">
+                                <p:commandButton value="Ver Detalles de Cuota" id="ver" actionListener="#{buttonView.buttonAction}" icon="ui-icon-disk" />
+                            </td>
+                        </h:panelGrid>
+                    </p:fieldset>
+
+
+                </p:dataGrid>
+            </p:fieldset>
+
+            
+        </h:form>
     </ui:define>
 
 </ui:composition>
+

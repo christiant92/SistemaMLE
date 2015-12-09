@@ -48,7 +48,8 @@
     <bean id="bienesDAO" class="com.mle.sistema.dao.DAOBienes"/>
     <bean id="consultaBienesDAO" class="com.mle.sistema.dao.DAOConsultaBienes"/>
     <bean id="procesoJudicialDAO" class="com.mle.sistema.dao.DAOProcesoJudicial"/>
-    
+    <bean id="seguimientoPrestamoDAO" class="com.mle.sistema.dao.DAOSeguimientoPrestamo"/>
+	
     <!-- Servicios -->
     <bean id="serviceLogin" class="com.mle.sistema.servicios.ServicioLogin">
         <property name="daoLogin" ref="loginDAO"></property>
@@ -61,7 +62,15 @@
     </bean>
     <bean id="serviceProcesoJudicial" class="com.mle.sistema.servicios.ServicioProcesoJudicial">
         <property name="daoProcesoJudicial" ref="procesoJudicialDAO"></property>
-    </bean>    
+    </bean>  
+    
+    <bean id="serviceSeguimientoPrestamo" class="com.mle.sistema.servicios.ServicioSeguimientoPrestamo">
+        <property name="daoSeguimientoPrestamo" ref="seguimientoPrestamoDAO"></property>
+    </bean>
+    <bean id="serviceConsultarSeguimientoPrestamo" class="com.mle.sistema.servicios.ServicioSeguimientoPrestamo">
+        <property name="daoSeguimientoPrestamo" ref="seguimientoPrestamoDAO"></property>
+    </bean>
+        
         
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>

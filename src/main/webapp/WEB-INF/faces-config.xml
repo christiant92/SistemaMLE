@@ -18,6 +18,28 @@
         </managed-property>
     </managed-bean>
     
+    <managed-bean>
+        <managed-bean-name>seguimientoPrestamoBean</managed-bean-name>
+        <managed-bean-class>com.mle.sistema.bean.BeanRegistrarSeguimientoPrestamo</managed-bean-class>
+    
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>seguimientoPrestamoService</property-name>
+            <value>#{serviceSeguimientoPrestamo}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>consultarSeguimientoPrestamoBean</managed-bean-name>
+        <managed-bean-class>com.mle.sistema.bean.BeanConsultarSeguimientoPrestamo</managed-bean-class>
+    
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>seguimientoPrestamoService</property-name>
+            <value>#{serviceConsultarSeguimientoPrestamo}</value>
+        </managed-property>
+    </managed-bean>
+    
     <!--REFERENCIAS DE LA VISTA PRINCIPAL-->
     <navigation-rule>
         <from-view-id>/principal.xhtml</from-view-id>

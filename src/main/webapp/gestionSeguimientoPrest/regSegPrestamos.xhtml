@@ -8,155 +8,163 @@
     <!-- 
     originalmente estaba: templateVistaAbogado.xhtml
     -->
-    
+
     <ui:define name="content">
+
+        <p:growl id="messagesGrows" autoUpdate="true" globalOnly="true" showSummary="true" showDetail="true" life="15000"/>
+
         
-            
-               
-        <h:form >
-        <p:panelGrid columns="4"  style=" margin: 0 auto;" >
-            <f:facet name="header">
-            Detalle del Prestamista
-            </f:facet>
-            <p:commandButton type="button" value="Buscar Cliente" />
-            <h:outputLabel for="b" value="" />            
-            <h:outputLabel for="b" value="" />
-            <h:outputLabel for="b" value="" />
-            
-            <h:outputLabel for="Nombres" value="Nombres: " />
-            <p:inputText value="" />
-            <h:outputLabel for="Apellidos" value="Apellidos: " />
-            <p:inputText value="" />
-            
-            <h:outputLabel for="Nombres" value="DNI: " />
-            <p:inputText value="" />
-            <h:outputLabel for="Nombres" value="Teléfono: " />
-            <p:inputText value="" />
-            
-            <h:outputLabel for="Nombres" value="Dirección: " />
-            <p:inputText value="" />
-            <h:outputLabel for="b" value="" />
-            <h:outputLabel for="b" value="" />
-        </p:panelGrid>  
-            
-        <p:panelGrid columns="4" style="margin: 0 auto;" >    
-            <f:facet name="header">
-            Detalle del Prestatario
-            </f:facet>            
-            <p:commandButton type="button" value="Buscar Deudor" />
-            <h:outputLabel for="b" value="" />            
-            <h:outputLabel for="b" value="" />
-            <h:outputLabel for="b" value="" />
-            
-            <h:outputLabel for="Nombres" value="Nombres: " />
-            <p:inputText value="" />
-            <h:outputLabel for="Apellidos" value="Apellidos: " />
-            <p:inputText value="" />
-            
-            <h:outputLabel for="Nombres" value="DNI: " />
-            <p:inputText value="" />
-            <h:outputLabel for="Nombres" value="Teléfono: " />
-            <p:inputText value="" />
-            
-            <h:outputLabel for="Nombres" value="Dirección: " />
-            <p:inputText value="" />
-            <h:outputLabel for="b" value="" />
-            <h:outputLabel for="b" value="" />
-            
-            <h:outputLabel for="Nombres" value="Aval: " />
-            <p:inputText value="" />
-            <p:commandButton type="button" value="Buscar Aval" />
-            <h:outputLabel for="b" value="" />
-         </p:panelGrid>   
-            
-        <p:panelGrid columns="4"  style="margin: 0 auto;"  >    
-            <f:facet name="header">
-            Detalle del Prestamo
-            </f:facet>      
-            <h:outputLabel for="Nombres" value="Monto del prestamo: " />
-            <p:inputText value="" />
-            <h:outputLabel for="Apellidos" value="Tasa de interes (%): " />
-            <p:inputText value="" />
-            <h:outputLabel for="Nombres" value="Nro Cuotas: " />
-            <p:inputText value="" />
-            
-            <h:outputLabel for="Nombres" value="Monto de cuota: " />
-            <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
-                <f:selectItem itemLabel="Select One" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>
-            
-            
-            <h:outputLabel for="Nombres" value="Fecha inicial de pago: " />
-            <h:outputText value="#{calendarView.date9}">
-                <f:convertDateTime pattern="MM/dd/yyyy" />
-            </h:outputText>
-            
-            <h:outputLabel for="Nombres" value="Forma de Cobranza: " />
-            <p:selectOneMenu id="console2" value="#{selectOneMenuView.console}" style="width:125px">
-                <f:selectItem itemLabel="Select One" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>
-            
-            <h:outputLabel for="Nombres" value="Tipo de moneda: " />
-            <p:selectOneMenu id="console3" value="#{selectOneMenuView.console}" style="width:125px">
-                <f:selectItem itemLabel="Select One" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>
-            
-            <h:outputLabel for="Apellidos" value="Periodo de Cobranza: " />
-            <p:selectOneMenu id="console4" value="#{selectOneMenuView.console}" style="width:125px">
-                <f:selectItem itemLabel="Select One" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>
-                        
-        </p:panelGrid>
-            
-        <p:outputPanel id="customPanel" style="margin-bottom:10px">
-            <p:selectOneRadio id="customRadio" value="" layout="custom">
-                <f:selectItem itemLabel="Red" itemValue="Red" />
-                <f:selectItem itemLabel="Green" itemValue="Green" />
-                <f:selectItem itemLabel="Blue" itemValue="Blue" />
-            </p:selectOneRadio>
+        <h:form id="ggg">
+
+            <p:fieldset legend="Detalle del Prestamista" style="margin-bottom:20px">
+                <!--
+                <h:panelGrid columns="6" cellpadding="5" >                    
+                    <p:commandButton value="Buscar Cliente" action="#{seguimientoPrestamoBean.validarPrestamista()}" />  
+                    <h:outputLabel  value="" />   
+                    <h:outputLabel  value="Nombres: " />
+                    <p:inputText id="txtNombres_prestamista" value="#{seguimientoPrestamoBean.nombres_prestamista}" />
+                    <h:outputLabel  value="Apellidos: " />
+                    <p:inputText id="txtApellidos_prestamista" value="#{seguimientoPrestamoBean.apellidos_prestamista}" />
+                    <h:outputLabel  value="DNI: " />
+                    <p:inputText id="txtDni_prestamista" value="#{seguimientoPrestamoBean.DNI_prestamista}" />
+                    <h:outputLabel  value="Teléfono: " />
+                    <p:inputText id="txtTelefono_prestamista" value="#{seguimientoPrestamoBean.teléfono_prestamista}" />
+                    <h:outputLabel  value="Dirección: " />
+                    <p:inputText id="txtDireccion_prestamista" value="#{seguimientoPrestamoBean.dirección_prestamista}" />
+                    <h:outputLabel  value="" />
+                    <h:outputLabel  value="" />
+                </h:panelGrid>
+                -->
+                
+                <p:inputText id="txtDni_prestamista" value="#{seguimientoPrestamoBean.DNI_prestamista}" placeholder="Ingrese DNI"/>
+                <p:commandButton  value="Buscar Cliente" update="grid_prestamista" actionListener ="#{seguimientoPrestamoBean.validarPrestamista1()}" />  
+                    <p:outputLabel  value="" /> 
+                    <p:dataGrid id="grid_prestamista"  value="#{seguimientoPrestamoBean.listaClientes}" var="prestamista">                    
+                      
+                    <h:panelGrid columns="6" cellpadding="5" >                    
+                    
+                    <p:outputLabel  value="Nombres: " />
+                    <p:inputText id="txtNombres_prestamista" value="#{prestamista.nombres}" />
+                    <p:outputLabel  value="Apellidos: " />
+                    <p:inputText id="txtApellidos_prestamista" value="#{prestamista.apellidos}" />
+                    <p:outputLabel  value="DNI: " />
+                    <p:inputText id="txtDni_prestamista" value="#{prestamista.dni}" />
+                    <p:outputLabel  value="Teléfono: " />
+                    <p:inputText id="txtTelefono_prestamista" value="#{prestamista.celular}" />
+                    <p:outputLabel  value="Dirección: " />
+                    <p:inputText id="txtDireccion_prestamista" value="#{prestamista.cliente.direccion}" />
+                    <p:outputLabel  value="" />
+                    <p:outputLabel  value="" />
+                </h:panelGrid>
+                    
+                </p:dataGrid>
+            </p:fieldset> 
+
+
+            <p:fieldset legend="Detalle del Prestatario" style="margin-bottom:20px">    
+                <p:inputText id="txtDni_prestatario" value="#{seguimientoPrestamoBean.DNI_prestatario}" placeholder="Ingrese DNI"/>
+                <p:commandButton  value="Buscar Deudor" update="grid_deudor"  actionListener ="#{seguimientoPrestamoBean.validarPrestatario1}"  />
+                
+                <p:dataGrid id="grid_deudor"  value="#{seguimientoPrestamoBean.listaDeudor}" var="deudor">
+                <h:panelGrid columns="6" cellpadding="5" >  
+                    
+                    <h:outputLabel  value="Nombres: " />
+                    <p:inputText id="txtNombres_prestatario" value="#{deudor.nombres}" />
+                    <h:outputLabel  value="Apellidos: " />
+                    <p:inputText id="txtApellidos_prestatario" value="#{deudor.apellidos}" />
+                    <h:outputLabel  value="DNI: " />
+                    <p:inputText id="txtDni_prestatario" value="#{deudor.dni}" />
+                    <h:outputLabel  value="Teléfono: " />
+                    <p:inputText id="txtTelefono_prestatario" value="#{deudor.telefono}" />
+                    <h:outputLabel  value="Dirección: " />
+                    <p:inputText id="txtDirección_prestatario" value="#{deudor.direccion}" />
+                    <p:outputLabel  value="" />
+                    <p:outputLabel  value="" />
+                    
+                    <p:inputText id="txtDni_aval" value="#{seguimientoPrestamoBean.DNI_Aval}" placeholder="Ingrese DNI" />
+                    <p:commandButton  value="Buscar Aval" update="grid_aval" actionListener ="#{seguimientoPrestamoBean.validarAval1}" />
+                     
+                    <p:dataGrid id="grid_aval"  value="#{seguimientoPrestamoBean.listaAval}" var="aval">
+                    <p:outputLabel  value="Apellidos y Nombres Aval: " />
+                    <p:inputText id="txtApellidosyNombres_aval" value="#{aval.apellidos}" />
+                    
+                    <h:outputLabel  value="" />
+                    </p:dataGrid>
+                    
+                </h:panelGrid>
+                    </p:dataGrid>
+            </p:fieldset>   
+
+
+
+            <p:fieldset legend="Detalle del Prestamo" style="margin-bottom:20px">    
+                <h:panelGrid columns="6" cellpadding="5" >  
+                    <h:outputLabel  value="Monto del prestamo: " />
+                    <p:inputText id="txtMontodelprestamo" value="#{seguimientoPrestamoBean.montoPrestamo}" />
+                    <h:outputLabel value="Tasa de interes (%): " />
+                    <p:inputText id="txtTasadeinteres"  value="#{seguimientoPrestamoBean.tasaInteres}" />
+                    <h:outputLabel  value="Nro Cuotas: " />
+                    <p:inputText id="txtNroCuotas" value="#{seguimientoPrestamoBean.nroCuotas}" />
+                    <h:outputLabel  value="Monto de cuota: " />
+                    <p:inputText id="txtMontodecuota" value="#{seguimientoPrestamoBean.montoCuota}" />
+                    <h:outputLabel  value="Forma de Cobranza: " />
+                    <p:selectOneMenu id="cboFormadeCobranza" value="#{seguimientoPrestamoBean.formaCobranza}" style="width:125px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItem itemLabel="Directo" itemValue="dir" />
+                        <f:selectItem itemLabel="Dcto. desde Planilla" itemValue="Dct" />
+                    </p:selectOneMenu>
+                    <h:outputLabel  value="Tipo de moneda: " />
+                    <p:selectOneMenu id="cboTipodemoneda" value="#{seguimientoPrestamoBean.tipoMoneda}" style="width:125px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItem itemLabel="S/." itemValue="1" />
+                        <f:selectItem itemLabel="$." itemValue="2" />
+                    </p:selectOneMenu>
+                    <h:outputLabel  value="Periodo de Cobranza: " />
+                    <p:selectOneMenu id="PeriododeCobranza" value="#{seguimientoPrestamoBean.periodoCobranza}" style="width:125px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItem itemLabel="Quincenal" itemValue="" />
+                        <f:selectItem itemLabel="Mensual" itemValue="Mensual" />
+                        <f:selectItem itemLabel="Trimestral" itemValue="Trimestral" />
+                        <f:selectItem itemLabel="Semestral" itemValue="Semestral" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Fecha inicial de pago:" />
+                    <p:calendar id="txtFechainicialdepago" value="#{seguimientoPrestamoBean.fechaInicialPago}" showOn="button" />
+                </h:panelGrid>
+            </p:fieldset>  
+
+            <!--
+            <p:fieldset legend="Especificaciones de Mora" style="margin-bottom:20px">    
+                <h:panelGrid columns="4" cellpadding="5" >  
+                    <p:selectOneRadio id="customRadio" value="" layout="custom">
+                        <f:selectItem itemLabel="Red" itemValue="Red" />
+                        <f:selectItem itemLabel="Green" itemValue="Green" />
+                        <f:selectItem itemLabel="Blue" itemValue="Blue" />
+                    </p:selectOneRadio>
+                    <h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;"  >
+                        <f:facet name="header">
+                        </f:facet> 
+                        <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+                        <h:outputLabel for="opt1" value="Ninguno" />
+                        <h:outputLabel  value="" />
+                        <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+                        <h:outputLabel for="opt2" value="Tasa ejectiva diaria (%)" />
+                        <p:inputText />
+                        <p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+                        <h:outputLabel for="opt3" value="Monto fijo" />
+                        <p:calendar />
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:fieldset>   
+            -->
 
             <h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;"  >
-                <f:facet name="header">
-                    Especificaciones de Mora  
-                </f:facet> 
-                <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
-                <h:outputLabel for="opt1" value="Ninguno" />
-                <h:outputLabel for="opt3" value="" />
-
-                <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
-                <h:outputLabel for="opt2" value="Tasa ejectiva diaria (%)" />
-                <p:inputText />
-
-                <p:radioButton id="opt3" for="customRadio" itemIndex="2" />
-                <h:outputLabel for="opt3" value="Monto fijo" />
-                <p:calendar />
+                 <p:commandButton value="Registrar Seguimiento" action="#{seguimientoPrestamoBean.registrarSeguimientoPrestamo}"/>  
+                 <p:commandButton value="Limipar" />
             </h:panelGrid>
-        </p:outputPanel>
 
-            <h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;"  >
-                <p:commandButton type="button" value="Registrar" />
-                <p:commandButton type="button" value="Limipar" />
-            </h:panelGrid>
-            
-            
         </h:form>
-        
-        
-       
-        
-        
+
+
     </ui:define>
 
 </ui:composition>
